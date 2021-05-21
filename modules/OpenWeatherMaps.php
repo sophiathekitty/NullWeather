@@ -4,21 +4,26 @@ class OpenWeatherMap {
     public function PullLiveWeatherData(){
         // am i the main hub? or should i pull from the main hub?
         $main = Settings::LoadSettingsVar("main");
-        if($main){
+        $hub = Servers::GetHub();
+        // grab live data from open weather map if i'm main or i there's no hub
+        if($main || is_null($hub)){
             $weather = $this->PullOpenWeatherMapWeatherApi();
             if(is_null($weather)) return null;
-            $weather_logs = new WeatherLogs();
-            $weather_logs->Save($weather);
+            WeatherLogs::LogCurrentWeather($weather);
+            return $weather;
         }
+        return null;
     }
     public function PullLiveForecastData(){
         // am i the main hub? or should i pull from the main hub?
         $main = Settings::LoadSettingsVar("main");
-        if($main){
+        $hub = Servers::GetHub();
+        if($main || is_null($hub)){
             $forecast = $this->PullOpenWeatherMapForecastApi();
             if(is_null($forecast)) return null;
-            $forecast = new Forecast();
+            return $forecast;
         }
+        return null;
     }
     
     private function PullOpenWeatherMapWeatherApi(){
@@ -33,9 +38,35 @@ class OpenWeatherMap {
         if(is_null($api_key)) return null;
         $url = "http://api.openweathermap.org/data/2.5/forecast?q=Westminster,US&units=imperial&appid=$api_key";
         $info = file_get_contents($url);
-        return json_decode($info);
+        $data = json_decode($info);
+        $forecast = [];
+        foreach($data->list as $d){
+            $f = $this->OpenWeatherMapForecastToNullForecast($d);
+            $forecast[] = $f;
+            Forecast::SaveForecast($f);
+        }
+        return $forecast;
     }
     
+    private function OpenWeatherMapForecastToNullForecast($data){
+        $forecast = [
+            "main" => $data->weather[0]->main,
+            "icon" => $data->weather[0]->icon,
+            "clouds" => $data->clouds->all,
+            "temp" => $data->main->temp,
+            "temp_max" => $data->main->temp_max,
+            "temp_min" => $data->main->temp_min,
+            "feels_like" => $data->main->feels_like,
+            "humidity" => $data->main->humidity,
+            "pressure" => $data->main->pressure,
+            "wind_deg" => $data->wind->deg,
+            "wind_speed" => $data->wind->speed,
+            "description" => $data->weather[0]->description,
+            "datetime" => $data->dt_txt
+        ];
+        return $forecast;
+    }
+
     private function OpenWeatherMapApiToNullWeather($data){
         $weather = [
             "main" => $data->current->weather[0]->main,
@@ -53,5 +84,7 @@ class OpenWeatherMap {
         ];
         return $weather;
     }
+
+
 }
 ?>

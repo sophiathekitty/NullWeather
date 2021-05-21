@@ -95,7 +95,7 @@ class Forecast extends clsModel {
             'Default'=>"",
             'Extra'=>""
         ],[
-            'Field'=>"created",
+            'Field'=>"datetime",
             'Type'=>"datetime",
             'Null'=>"NO",
             'Key'=>"",
@@ -103,6 +103,32 @@ class Forecast extends clsModel {
             'Extra'=>""
         ]
     ];
+    public static $forecast = null;
+    public static function GetForecastInstance(){
+        if(is_null(Forecast::$forecast)) Forecast::$forecast = new Forecast();
+        return Forecast::$forecast;
+    }
+    public static function LoadForecast(){
+        $forecast = Forecast::GetForecastInstance();
+        return $forecast->LoadAll();
+    }
+    public static function LoadForecastHour($h){
+        $forecast = Forecast::GetForecastInstance();
+        return $forecast->LoadFieldHour('datetime',$h);
+    }
+    public static function SaveForecast($forecast){
+        $instance = Forecast::GetForecastInstance();
+        $row = $instance->LoadWhere(['datetime'=>$forecast['datetime']]);
+        if(is_null($row)){
+            $instance->Save($forecast);
+        } else {
+            $instance->Save($forecast,['datetime'=>$forecast['datetime']]);
+        }
+    }
+    public static function Prune(){
+        $forecast = Forecast::GetForecastInstance();
+        $forecast->PruneField('datetime',0);
+    }
 }
 if(defined('VALIDATE_TABLES')){
     clsModel::$models[] = new WeatherLogs();

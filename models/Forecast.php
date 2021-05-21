@@ -117,6 +117,7 @@ class Forecast extends clsModel {
         return $forecast->LoadFieldHour('datetime',$h);
     }
     public static function SaveForecast($forecast){
+        Forecast::Prune();
         $instance = Forecast::GetForecastInstance();
         $row = $instance->LoadWhere(['datetime'=>$forecast['datetime']]);
         if(is_null($row)){
@@ -131,6 +132,6 @@ class Forecast extends clsModel {
     }
 }
 if(defined('VALIDATE_TABLES')){
-    clsModel::$models[] = new WeatherLogs();
+    clsModel::$models[] = new Forecast();
 }
 ?>

@@ -1,38 +1,69 @@
 <?php
-class WeatherChart {
 
-    private static $chart = null;
+class ForecastChart {
+    private static $log = null;
     private static function GetInstance(){
-        if(is_null(WeatherChart::$chart)) WeatherChart::$chart = new WeatherChart();
-        return WeatherChart::$chart;
+        if(is_null(ForecastChart::$log)) ForecastChart::$log = new ForecastChart();
+        return ForecastChart::$log;
     }
-    public static function Weather(){
-        $chart = WeatherChart::GetInstance();
-        return $chart->WeatherHourlyAveragesLog();
+    public static function Averages(){
+        $log = ForecastChart::GetInstance();
+        return $log->ForecastHourlyAveragesLog();
     }
-    public static function Temp(){
-        $chart = WeatherChart::GetInstance();
-        return $chart->WeatherHourlyTempLog();
+    public static function Temps(){
+        $log = ForecastChart::GetInstance();
+        return $log->ForecastHourlyTempLog();
+    }
+    function ForecastHourlyTempLog(){
+        $weatherLog = [];
+        for($h = 0; $h < 24; $h++){
+            $weatherLog[$h] = $this->ForecastHourlyTemp($h);
+        }
+        return $weatherLog;
     }
 
-    function WeatherHourlyTempLog(){
+    function ForecastHourlyAveragesLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){
-            $weatherLog[$h] = $this->WeatherHourlyTemp($h);
+            $weatherLog[$h] = $this->ForecastHourlyAverage($h);
         }
         return $weatherLog;
     }
-    
-    function WeatherHourlyAveragesLog(){
-        $weatherLog = [];
-        for($h = 0; $h < 24; $h++){
-            $weatherLog[$h] = $this->WeatherHourlyAverage($h);
+
+    function ForecastHourlyAverage($hour){
+        $data = Forecast::LoadForecastHour($hour);
+        if(count($data) == 0){
+            // is the previous hour 0, 3, 6, 9, 12, 15, 18, 21
+            $data = Forecast::LoadForecastHour($hour-1);
+            /*if(count($data) > 0){
+                //$data = GetForecastForHour($hour-1);
+                // if 22 we need 21,21, 0
+                if($hour+2 > 23){
+                    $data = GetForecastForHour(0);
+                    $data = GetForecastForHour(0);
+                } else {
+                    $data = GetForecastForHour($hour+2);
+                    $data = GetForecastForHour($hour+2);
+                }
+            }*/
         }
-        return $weatherLog;
-    }
-    
-    function WeatherHourlyAverage($hour){
-        $data = WeatherLogs::LoadWeatherHour($hour);
+        if(count($data) == 0){
+            // if next hour is 3, 6, 9, 12, 15, 18, 21
+            $data = Forecast::LoadForecastHour($hour+1);
+            /*if(count($data) > 0){
+                //$data = GetForecastForHour($hour+1);
+                $data = GetForecastForHour($hour-2);
+                $data = GetForecastForHour($hour-2);
+            }*/
+        }
+        // if hour is 23
+        if(count($data) == 0){
+            //$data = GetForecastForHour(0);
+            $data = Forecast::LoadForecastHour(0);
+            //$data = GetForecastForHour(21);
+            //$data = GetForecastForHour(21);
+        }
+        //$data = array_merge($data,GetWeatherForHour($hour));
         $averages = [      
             "hour" => $hour,  
             "main" => [],
@@ -55,12 +86,12 @@ class WeatherChart {
         if(count($data) == 0){
             return $averages;
         }
+        $min_temp = 100000;
+        $max_temp = 0;
         $min_hum = 100000;
         $max_hum = 0;
         $min_wind = 100000;
         $max_wind = 0;
-        $min_clouds = 100000;
-        $max_clouds = 0;
         foreach($data as $h){
             if($averages['main'][$h['main']]){
                 $averages['main'][$h['main']]++;
@@ -80,7 +111,9 @@ class WeatherChart {
             $averages['clouds'] += $h['clouds'];
             $averages['temp'] += $h['temp'];
             $averages['temp_max'] += $h['temp_max'];
+            if($max_temp < $h['temp_max']) $max_temp = $h['temp_max'];
             $averages['temp_min'] += $h['temp_min'];
+            if($min_temp > $h['temp_min']) $min_temp = $h['temp_min'];
             $averages['feels_like'] += $h['feels_like'];
             $averages['humidity'] += $h['humidity'];
             $averages['pressure'] += $h['pressure'];
@@ -98,18 +131,14 @@ class WeatherChart {
             if($max_wind < $h['wind_speed']){
                 $max_wind = $h['wind_speed'];
             }
-            if($min_clouds > $h['clouds']){
-                $min_clouds = $h['clouds'];
-            }
-            if($max_clouds < $h['clouds']){
-                $max_clouds = $h['clouds'];
-            }
         }
-    
+
         $averages['clouds'] = round($averages['clouds']/count($data),2);
         $averages['temp'] = round($averages['temp']/count($data),2);
-        $averages['temp_max'] = round($averages['temp_max']/count($data),2);
-        $averages['temp_min'] = round($averages['temp_min']/count($data),2);
+        //$averages['temp_max'] = round($averages['temp_max']/count($data),2);
+        //$averages['temp_min'] = round($averages['temp_min']/count($data),2);
+        $averages['temp_max'] = $max_temp;
+        $averages['temp_min'] = $min_temp;
         $averages['feels_like'] = round($averages['feels_like']/count($data),2);
         $averages['humidity'] = round($averages['humidity']/count($data),2);
         $averages['pressure'] = round($averages['pressure']/count($data),2);
@@ -119,8 +148,6 @@ class WeatherChart {
         $averages['min_hum'] = round($min_hum,2);
         $averages['max_wind'] = round($max_wind,2);
         $averages['min_wind'] = round($min_wind,2);
-        $averages['max_clouds'] = round($max_clouds,2);
-        $averages['min_clouds'] = round($min_clouds,2);
         $i_count = 0;
         $averages['icon'] = "";
         foreach($averages['icons'] as $key => $value){
@@ -131,10 +158,16 @@ class WeatherChart {
         }
         return $averages;
     }
-    
-    
-    function WeatherHourlyTemp($hour){
-        $data = WeatherLogs::LoadWeatherHour($hour);
+
+
+    function ForecastHourlyTemp($hour){
+        $data = Forecast::LoadForecastHour($hour);
+        if(count($data) == 0){
+            $data = Forecast::LoadForecastHour($hour-1);
+        }
+        if(count($data) == 0){
+            $data = Forecast::LoadForecastHour($hour+1);
+        }
         if($hour < 10){
             $average['hour'] = "0".$hour;
         } else {
@@ -151,11 +184,12 @@ class WeatherChart {
             $average['temp_min'] += $h['temp_min'];
             $average['temp_max'] += $h['temp_max'];
         }
-    
+
         $average['temp'] = round($average['temp']/count($data),2);
         $average['temp_min'] = round($average['temp_min']/count($data),2);
         $average['temp_max'] = round($average['temp_max']/count($data),2);
         return $average;
     }
 }
+
 ?>

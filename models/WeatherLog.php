@@ -125,7 +125,10 @@ class WeatherLogs extends clsModel {
     public static function LogCurrentWeather($weather){
         $weather_logs = WeatherLogs::GetInstance();
         $current = WeatherLogs::RecentWeather(MinutesToSeconds(Settings::LoadSettingsVar('weather_log_delay',10)));
-        if(is_null($current)) $weather_logs->Save($weather);
+        if(is_null($current)) {
+            WeatherLogs::Prune();
+            $weather_logs->Save($weather);
+        }
     }
     public static function Prune(){
         $weather = WeatherLogs::GetInstance();

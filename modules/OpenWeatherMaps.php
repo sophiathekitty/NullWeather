@@ -2,6 +2,7 @@
 
 class OpenWeatherMap {
     public function PullLiveWeatherData(){
+        echo "OpenWeatherMap::PullLiveWeatherData()\n";
         // am i the main hub? or should i pull from the main hub?
         $main = Settings::LoadSettingsVar("main");
         $hub = Servers::GetHub();

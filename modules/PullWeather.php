@@ -7,8 +7,9 @@ class PullRemoteWeather {
         return PullRemoteWeather::$weather;
     }
     public static function GetLiveWeather(){
-        //echo "PullRemoteWeather::GetLiveWeather()\n";
         $weather = PullRemoteWeather::GetInstance();
+        $recent = WeatherLogs::RecentWeather(MinutesToSeconds(Settings::LoadSettingsVar('weather_pull_delay',5)));
+        if(count($recent)) return WeatherLogs::CurrentWeather();
         return $weather->PullWeather();
     }
     public static function GetLiveForecast(){

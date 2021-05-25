@@ -5,7 +5,7 @@ a pluging for handling the weather features of my null stuff... so i can make it
 ## clone repo
 
 ```bash
-cd \var\www\html\plugins
+cd /var/www/html/plugins
 ```
 
 ```bash

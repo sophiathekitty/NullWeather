@@ -112,6 +112,10 @@ class Forecast extends clsModel {
         $forecast = Forecast::GetForecastInstance();
         return $forecast->LoadAll();
     }
+    public static function LoadUpcomingForecast(){
+        $forecast = Forecast::GetForecastInstance();
+        return $forecast->LoadFieldBefore("datetime",date("Y-m-d H:i:s",time()+DaysToSeconds(2)));
+    }
     public static function LoadForecastHour($h){
         $forecast = Forecast::GetForecastInstance();
         return $forecast->LoadFieldHour('datetime',$h);

@@ -30,14 +30,18 @@ class OpenWeatherMap {
     private function PullOpenWeatherMapWeatherApi(){
         $api_key = Settings::LoadSettingsVar('weather_api_key');
         if(is_null($api_key)) return null;
-        $url = "http://api.openweathermap.org/data/2.5/weather?q=Westminster,US&units=imperial&appid=$api_key";
+        $city = Settings::LoadSettingsVar('weather_city',"Westminster,US");
+        $units = Settings::LoadSettingsVar('weather_units',"imperial");
+        $url = "http://api.openweathermap.org/data/2.5/weather?q=$city&units=$units&appid=$api_key";
         $info = file_get_contents($url);
         return $this->OpenWeatherMapApiToNullWeather(json_decode($info));
     }
     private function PullOpenWeatherMapForecastApi(){
         $api_key = Settings::LoadSettingsVar('weather_api_key');
         if(is_null($api_key)) return null;
-        $url = "http://api.openweathermap.org/data/2.5/forecast?q=Westminster,US&units=imperial&appid=$api_key";
+        $city = Settings::LoadSettingsVar('weather_city',"Westminster,US");
+        $units = Settings::LoadSettingsVar('weather_units',"imperial");
+        $url = "http://api.openweathermap.org/data/2.5/forecast?q=$city&units=$units&appid=$api_key";
         $info = file_get_contents($url);
         $data = json_decode($info);
         $forecast = [];
@@ -48,7 +52,15 @@ class OpenWeatherMap {
         }
         return $forecast;
     }
-    
+    private function PullOpenWeatherMapOneCall(){
+        $api_key = Settings::LoadSettingsVar('weather_api_key');
+        if(is_null($api_key)) return null;
+        $city = Settings::LoadSettingsVar('weather_city',"Westminster,US");
+        $units = Settings::LoadSettingsVar('weather_units',"imperial");
+        $url = "http://api.openweathermap.org/data/2.5/onecall?q=$city&units=$units&appid=$api_key";
+        $info = file_get_contents($url);
+        $data = json_decode($info);
+    }
     private function OpenWeatherMapForecastToNullForecast($data){
         $forecast = [
             "main" => $data->weather[0]->main,

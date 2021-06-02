@@ -1,0 +1,140 @@
+section#weather{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+#live_weather .forecast {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -10;
+}
+#live_weather .forecast[expected="0"] {
+    opacity: 0;
+}
+#live_weather .forecast[expected="1"] {
+    opacity: 0.1;
+}
+#live_weather .forecast[expected="2"] {
+    opacity: 0.15;
+}
+#live_weather .forecast[expected="3"] {
+    opacity: 0.2;
+}
+#live_weather .forecast[expected="4"],
+#live_weather .forecast[expected="5"] {
+    opacity: 0.25;
+}
+#live_weather .forecast[expected="6"],
+#live_weather .forecast[expected="7"] {
+    opacity: 0.3;
+}
+#live_weather .forecast[expected="8"],
+#live_weather .forecast[expected="9"] {
+    opacity: 0.35;
+}
+#live_weather .forecast[expected="10"],
+#live_weather .forecast[expected="11"] {
+    opacity: 0.4;
+}
+#live_weather .forecast[expected="12"],
+#live_weather .forecast[expected="13"] {
+    opacity: 0.45;
+}
+#live_weather .forecast[expected="14"],
+#live_weather .forecast[expected="15"] {
+    opacity: 0.5;
+}
+#live_weather .forecast[expected="16"],
+#live_weather .forecast[expected="17"] {
+    opacity: 0.55;
+}
+#live_weather .forecast[expected="18"],
+#live_weather .forecast[expected="19"] {
+    opacity: 0.6;
+}
+#live_weather .forecast[expected="20"],
+#live_weather .forecast[expected="21"] {
+    opacity: 0.65;
+}
+#live_weather .forecast[expected="22"],
+#live_weather .forecast[expected="23"],
+#live_weather .forecast[expected="24"] {
+    opacity: 0.7;
+}
+#live_weather .forecast[expected="25"],
+#live_weather .forecast[expected="26"],
+#live_weather .forecast[expected="27"] {
+    opacity: 0.75;
+}
+#live_weather .forecast[expected="28"],
+#live_weather .forecast[expected="29"],
+#live_weather .forecast[expected="30"] {
+    opacity: 0.8;
+}
+#live_weather .forecast[expected="31"],
+#live_weather .forecast[expected="32"],
+#live_weather .forecast[expected="33"] {
+    opacity: 0.85;
+}
+#live_weather .forecast[expected="34"],
+#live_weather .forecast[expected="35"],
+#live_weather .forecast[expected="36"] {
+    opacity: 0.9;
+}
+#live_weather .forecast[expected="37"],
+#live_weather .forecast[expected="38"],
+#live_weather .forecast[expected="39"] {
+    opacity: 0.95;
+}
+#live_weather .forecast[expected="40"],
+#live_weather .forecast[expected="41"],
+#live_weather .forecast[expected="42"],
+#live_weather .forecast[expected="43"],
+#live_weather .forecast[expected="44"],
+#live_weather .forecast[expected="45"],
+#live_weather .forecast[expected="46"],
+#live_weather .forecast[expected="47"],
+#live_weather .forecast[expected="48"],
+#live_weather .forecast[expected="49"],
+#live_weather .forecast[expected="50"] {
+    opacity: 1;
+}
+#live_weather .current_weather {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -1;
+}
+
+#live_weather .forecast[var="rain"]{
+    background-image: url(/plugins/NullWeather/img/web/rain_big.png);
+}
+#live_weather .forecast[var="snow"]{
+    background-image: url(/plugins/NullWeather/img/web/snow_big.png);
+}
+#live_weather .forecast[var="wind"]{
+    background-image: url(/plugins/NullWeather/img/web/wind_big.png);
+}
+#live_weather .forecast[var="smoke"]{
+    background-image: url(/plugins/NullWeather/img/web/smoke_big.png);
+}
+#live_weather .forecast[var="extreme"]{
+    background-image: url(/plugins/NullWeather/img/web/extreme_big.png);
+}
+#live_weather .forecast[var="clouds"]{
+    background-image: url(/plugins/NullWeather/img/web/clouds_big.png);
+}

@@ -1,0 +1,380 @@
+
+<section id="weather" show="temp" focus="outdoors">
+    <nav class="filters" chart="weather_chart">
+        <a href="#" filter="temp">Temperature</a>
+        <a href="#" filter="humidity">Humidity</a>
+        <a href="#" filter="wind">Wind</a>
+        <a href="#" filter="clouds">Clouds</a>
+    </nav>
+    <nav class="toggle_temperature" chart="weather_chart">
+        <a href="#" focus="indoors">Indoors</a>
+        <a href="#" focus="outdoors">Weather</a>
+    </nav>
+    <div class="forecast_holder">
+        <div id="forecast" collection="forecast">
+        </div>
+    </div>
+    <div id="weather_chart" class="weather_chart">
+        <div class="time_bar"></div>
+        <div class="hour" hour="00" hour_txt="12am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="01" hour_txt="1am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="02" hour_txt="2am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="03" hour_txt="3am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="04" hour_txt="4am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="05" hour_txt="5am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="06" hour_txt="6am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="07" hour_txt="7am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="08" hour_txt="8am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="09" hour_txt="9am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="10" hour_txt="10am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="11" hour_txt="11am">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="12" hour_txt="12pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="13" hour_txt="1pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="14" hour_txt="2pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="15" hour_txt="3pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="16" hour_txt="4pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="17" hour_txt="5pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="18" hour_txt="6pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="19" hour_txt="7pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="20" hour_txt="8pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="21" hour_txt="9pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="22" hour_txt="10pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+        <div class="hour" hour="23" hour_txt="11pm">
+            <div class="icon"></div>
+            <div class="bar graph">
+                <div class="temp forecast"></div>
+                <div class="temp weather"></div>
+                <div class="temp indoors"></div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+                <div class="clouds"></div>
+            </div>
+            <div class="humidity" var="humidity" unit="percent"></div>
+            <div class="temperature extra" var="temperature" unit="fahrenheit"></div>
+            <div class="wind" var="wind" unit="MetersPerSeconds"></div>
+            <div class="clouds" var="clouds" unit="percent"></div>
+        </div>
+    </div>
+</section>

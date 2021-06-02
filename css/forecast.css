@@ -1,0 +1,589 @@
+section#weather #forecast {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+section#weather {
+    position: relative;
+    background: linear-gradient(to bottom, #6660 0%, #666d 10%, #666 100%);
+}
+section#weather div#forecast {
+    display: flex;
+    flex-direction: row;
+    /*overflow: hidden;*/
+    white-space: nowrap;
+    clip: auto;
+    width:auto;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2c539e+0,2c539e+100&1+0,0+100;Blue+3D+%232 */
+    /*background: -moz-linear-gradient(top,  rgba(44,83,158,1) 0%, rgba(44,83,158,0) 100%); /* FF3.6-15 */
+    /* background: -webkit-linear-gradient(top,  rgba(44,83,158,1) 0%,rgba(44,83,158,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    /* background: linear-gradient(to bottom,  rgba(44,83,158,1) 0%,rgba(44,83,158,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#002c539e',GradientType=0 ); /* IE6-9 */
+}
+section#weather div#forecast .forecast {
+    display: block;
+    background-position: 1.5em 1em;
+    background-size: 4.20em;
+    background-repeat: no-repeat;
+    margin: 0.1em;
+    padding-left: 0.1em;
+    padding-top: 4.20em;
+    width: 7.10em;
+    min-width: 7.10em;
+    font-size: 1.25em;
+    text-align: center;
+    border-left: dashed #00000066 thin;
+    margin-bottom: 0em;
+}
+section#weather div#forecast .forecast .day{
+    margin-left: -0.1em;
+    margin-right: -0.2em;
+    font-family: 'Sansation';
+    font-weight: bold;
+    color: azure;
+}
+section#weather div#forecast .forecast[day="Sun"] .time{
+    color: rgba(108,169,201,1);
+}
+section#weather div#forecast .forecast[day="Sun"] .day{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,6ca9c9+100&0+50,1+100 */
+    background: -moz-linear-gradient(top,  rgba(153,153,153,0) 0%, rgba(108,169,201,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(153,153,153,0) 0%,rgba(108,169,201,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(108,169,201,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#6ca9c9',GradientType=0 ); /* IE6-9 */
+}
+section#weather div#forecast .forecast[day="Mon"] .time{
+    color: rgba(106,196,106,1);
+}
+section#weather div#forecast .forecast[day="Mon"] .day{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,6ac46a+100&0+50,1+100 */
+    background: -moz-linear-gradient(top,  rgba(153,153,153,0) 0%,  rgba(106,196,106,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(153,153,153,0) 0%,rgba(106,196,106,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(106,196,106,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#6ac46a',GradientType=0 ); /* IE6-9 */
+}
+section#weather div#forecast .forecast[day="Tue"] .time{
+    color: rgba(209,193,115,1);
+}
+section#weather div#forecast .forecast[day="Tue"] .day {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,d1c173+100&0+50,1+100 */
+    background: -moz-linear-gradient(top,  rgba(153,153,153,0) 0%, rgba(209,193,115,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(153,153,153,0) 0%,rgba(209,193,115,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(209,193,115,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#d1c173',GradientType=0 ); /* IE6-9 */
+}
+section#weather div#forecast .forecast[day="Wed"] .time{
+    color: rgba(216,121,177,1);
+}
+section#weather div#forecast .forecast[day="Wed"] .day{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,d879b1+100&0+50,1+100 */
+    background: -moz-linear-gradient(top,  rgba(153,153,153,0) 0%, rgba(216,121,177,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(153,153,153,0) 0%,rgba(216,121,177,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(216,121,177,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#d879b1',GradientType=0 ); /* IE6-9 */
+}
+section#weather div#forecast .forecast[day="Thu"] .time{
+    color: rgba(148,123,216,1);
+}
+section#weather div#forecast .forecast[day="Thu"] .day{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,947bd8+100&0+50,1+100 */
+    background: -moz-linear-gradient(top,  rgba(153,153,153,0) 0%, rgba(148,123,216,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(153,153,153,0) 0%,rgba(148,123,216,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(148,123,216,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#947bd8',GradientType=0 ); /* IE6-9 */
+}
+section#weather div#forecast .forecast[day="Fri"] .time{
+    color: rgba(130,229,135,1);
+}
+section#weather div#forecast .forecast[day="Fri"] .day{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,82e587+100&0+50,1+100 */
+    background: -moz-linear-gradient(top,  rgba(153,153,153,0) 0%, rgba(130,229,135,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(153,153,153,0) 0%,rgba(130,229,135,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(130,229,135,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#82e587',GradientType=0 ); /* IE6-9 */
+}
+section#weather div#forecast .forecast[day="Sat"] .time{
+    color: rgba(237,135,135,1);
+}
+section#weather div#forecast .forecast[day="Sat"] .day{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,ed8787+100&0+50,1+100 */
+    background: -moz-linear-gradient(top,  rgba(153,153,153,0) 0%, rgba(237,135,135,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(153,153,153,0) 0%,rgba(237,135,135,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(237,135,135,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#ed8787',GradientType=0 ); /* IE6-9 */
+}
+
+section#weather div#forecast .forecast:first-child{
+    border-left: none;
+}
+section#weather div#forecast .forecast [var="temp_max"] {
+    font-size: 2.1em;
+    margin-left: -1em;
+    margin-top: 0.5em;
+    text-shadow: #00000066 0.1em 0.1em 0.1em;
+}
+section#weather div#forecast .forecast [var="temp_min"] {
+    font-size: 1.5em;
+    margin-right: -1em;
+    margin-left: 1em;
+    position: relative;
+    text-shadow: #00000066 0.1em 0.1em 0.1em;
+}
+section#weather div#forecast .forecast [var="temp_min"]::before {
+    content: '/';
+    font-size: 2em;
+    position: absolute;
+    top: -0.5em;
+    left: 0.6em;
+    color: #ffffff33;
+    text-shadow: none;
+}
+section#weather div#forecast .forecast div::after {
+    font-size: 0.5em;
+    position: relative;
+    bottom: 0.5em;
+}
+section#weather div#forecast .forecast .time {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+section#weather div#forecast .forecast .humidity,
+section#weather div#forecast .forecast .clouds,
+section#weather div#forecast .forecast .wind {
+    font-size: 2em;
+    margin-top: 0.5em;
+}
+section#weather div#forecast .forecast .temp[var='feels_like']::before {
+    content: "feels like";
+    display: inline-block;
+    font-size: 0.70em;
+    white-space: nowrap;
+    font-weight: normal;
+    width: 5em;
+    background: none !important;
+}
+section#weather div#forecast .forecast .description {
+    font-size: 0.5em;
+}
+
+section#weather div.weather_chart {
+    display: flex;
+    flex-direction: row;
+    height: 18em;
+    margin-top: 0.1em;
+    border: solid thin #00000088;
+    --sunlight_alpha:0.25;
+
+    --sunrise_start:25%;
+    --sunrise: 30%;
+    --sunrise_end: 35%;
+
+    --sunset_start: 65%;
+    --sunset: 70%;
+    --sunset_end: 75%;
+
+    background: linear-gradient(90deg,
+        rgba(0, 0, 66,var(--sunlight_alpha)) 0%, 
+        rgba(0, 0, 66,var(--sunlight_alpha)) var(--sunrise_start), 
+        rgba(177, 33, 148, var(--sunlight_alpha)) var(--sunrise), 
+        rgba(0, 166, 255, var(--sunlight_alpha)) var(--sunrise_end),
+        rgba(0, 166, 255, var(--sunlight_alpha)) var(--sunset_start),
+        rgba(192, 52, 17, var(--sunlight_alpha)) var(--sunset),
+        rgba(0,0,66,var(--sunlight_alpha)) var(--sunset_end),
+        rgba(0,0,66,var(--sunlight_alpha)) 100%);
+}
+.light_chart {
+    --sunlight_alpha:0.25;
+
+    --sunrise_start:25%;
+    --sunrise: 30%;
+    --sunrise_end: 35%;
+
+    --sunset_start: 65%;
+    --sunset: 70%;
+    --sunset_end: 75%;
+
+    background: linear-gradient(90deg,
+        rgba(0, 0, 0,var(--sunlight_alpha)) 0%, 
+        rgba(66, 66, 66,var(--sunlight_alpha)) var(--sunrise_start), 
+        rgba(100, 100, 100, var(--sunlight_alpha)) var(--sunrise), 
+        rgba(255, 255, 255, var(--sunlight_alpha)) var(--sunrise_end),
+        rgba(255, 255, 255, var(--sunlight_alpha)) var(--sunset_start),
+        rgba(100, 100, 100, var(--sunlight_alpha)) var(--sunset),
+        rgba(66,66,66,var(--sunlight_alpha)) var(--sunset_end),
+        rgba(0,0,0,var(--sunlight_alpha)) 100%);
+}
+section#weather nav {
+    display: inline-block;
+    padding: 0.5em;
+    background-color: #aaa6;
+    border-top-right-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+}
+section#weather nav.toggle_temperature {
+    position: absolute;
+    right: 0em;
+    top: 0em;
+}
+section#weather nav a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 0.1em;
+    padding-left: 1em;
+    margin-right: 0.1em;
+    padding-left: 0.2em;
+}
+section#weather nav a[filter="temp"]::before,
+section#weather nav a[filter="humidity"]::before,
+section#weather nav a[filter="wind"]::before,
+section#weather nav a[filter="clouds"]::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-position: center center;
+    background-size: contain;
+}
+section#weather nav a[filter="temp"]::before{
+    background-image: url(../app/img/actions/thermometer-scale.png);
+}
+section#weather nav a[filter="humidity"]::before{
+    background-image: url(../app/img/raining.png);
+}
+section#weather nav a[filter="wind"]::before{
+    background-image: url(../images/weather/wind.png);
+}
+section#weather nav a[filter="clouds"]::before{
+    background-image: url(../images/weather/clouds.png);
+}
+section#weather div.weather_chart .hour {
+    flex-grow: 1;
+    border-left: solid thin #00000066;
+    position: relative;
+}
+section#weather div.weather_chart .hour::after {
+    content: attr(hour_txt);
+    position: absolute;
+    left: 0.1em;
+    right: 0.1em;
+    bottom: 0.1em;
+    text-align: center;
+}
+section#weather div.weather_chart .hour .icon{
+    display: block;
+    position: absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    height: 4em;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+section#weather div.weather_chart .hour:first-child {
+    border-left: none;
+}
+
+section#weather div.weather_chart .hour .bar.graph {
+    position: absolute;
+    left: 0em;
+    right: 0em;
+    top:4em;
+    bottom: 4em;
+    display: block;
+}
+section#weather div.weather_chart .hour .temp {
+    position: absolute;
+    left: 0em;
+    right: 0em;
+    top:0em;
+    bottom: 0em;
+    display: block;
+}
+
+section#weather div.weather_chart .hour .wind {
+    position: absolute;
+    left: 0em;
+    right: 0em;
+    bottom: 2em;
+    display: block;
+    text-align: center;
+    display: none;
+}
+section#weather div.weather_chart .hour .humidity {
+    position: absolute;
+    left: 0em;
+    right: 0em;
+    bottom: 2em;
+    display: block;
+    text-align: center;
+    display: none;
+}
+section#weather div.weather_chart .hour .clouds {
+    position: absolute;
+    left: 0em;
+    right: 0em;
+    bottom: 2em;
+    display: block;
+    text-align: center;
+    display: none;
+}
+section#weather div.weather_chart .hour .temperature {
+    position: absolute;
+    left: 0em;
+    right: 0em;
+    bottom: 2em;
+    display: block;
+    text-align: center;
+}
+
+
+section#weather[show="temp"] nav a[filter="temp"],
+section#weather[show="humidity"] nav a[filter="humidity"],
+section#weather[show="wind"] nav a[filter="wind"],
+section#weather[show="clouds"] nav a[filter="clouds"],
+section#weather[focus="indoors"] nav a[focus="indoors"],
+section#weather[focus="outdoors"] nav a[focus="outdoors"],
+section#weather[focus="forecast"] nav a[focus="forecast"] {
+    text-decoration: underline;
+}
+section#weather[show="wind"] nav.toggle_temperature {
+    display: none;
+}
+section#weather[show="temp"] .temp,
+section#weather[show="temp"] .hour .temperature,
+section#weather[show="humidity"] .humidity,
+section#weather[show="wind"] .wind,
+section#weather[show="clouds"] .clouds {
+    display: block !important;
+}
+section#weather .extra,
+section#weather .graph div,
+section#weather .hour .temperature {
+    display: none !important;
+}
+
+section#weather .forecast_holder {
+    overflow-x: scroll;
+    padding-bottom: 0px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2c539e+0,2c539e+100&1+0,0+100;Blue+3D+%232 */
+    background: -moz-linear-gradient(top,  rgba(44,83,158,1) 0%, rgba(44,83,158,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(44,83,158,1) 0%,rgba(44,83,158,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(44,83,158,1) 0%,rgba(44,83,158,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#002c539e',GradientType=0 ); /* IE6-9 */
+}
+section#weather div.forecast_holder::-webkit-scrollbar {
+    width: 0.1em;
+}
+
+section#weather[focus="indoors"] .temp.indoors{
+    opacity: 0.95;
+}
+section#weather[focus="indoors"] .temp.weather{
+    opacity: 0.25;
+}
+section#weather[focus="indoors"] .temp.forecast{
+    opacity: 0.01;
+}
+
+section#weather[focus="outdoors"] .temp.indoors{
+    opacity: 0.01;
+}
+section#weather[focus="outdoors"] .temp.weather{
+    opacity: 1;
+}
+section#weather[focus="outdoors"] .temp.forecast{
+    opacity: 0.35;
+}
+
+section#weather[focus="forecast"] .temp.indoors{
+    opacity: 0.01;
+}
+section#weather[focus="forecast"] .temp.weather{
+    opacity: 0.25;
+}
+section#weather[focus="forecast"] .temp.forecast{
+    opacity: 0.95;
+}
+
+
+section#weather .graph div.humidity {
+    background-color: rgb(43, 149, 248,0.9);
+}
+section#weather .graph div.wind {
+    background-color: rgba(231, 255, 200, 0.9);
+}
+
+
+section#weather .graph div.humidity[hum_range="0"]{
+    background-color: #b1c577ee;
+}
+section#weather .graph div.humidity[hum_range="1"]{
+    background-color: #90cf95ee;
+}
+section#weather .graph div.humidity[hum_range="2"]{
+    background-color: #74d6adee;
+}
+section#weather .graph div.humidity[hum_range="3"]{
+    background-color: #59dac3ee;
+}
+section#weather .graph div.humidity[hum_range="4"]{
+    background-color: #43dad4ee;
+}
+section#weather .graph div.humidity[hum_range="5"]{
+    background-color: #2edae3ee;
+}
+section#weather .graph div.humidity[hum_range="6"]{
+    background-color: #1edaeaee;
+}
+section#weather .graph div.humidity[hum_range="7"]{
+    background-color: #0cc7e5ee;
+}
+section#weather .graph div.humidity[hum_range="8"]{
+    background-color: #04a0caee;
+}
+section#weather .graph div.humidity[hum_range="9"]{
+    background-color: #0474a4ee;
+}
+section#weather .graph div.humidity[hum_range="10"]{
+    background-color: #054a7fee;
+}
+
+
+section#weather .graph div.wind[wind_range="0"]{
+    background-color: #dcf8e7ee;
+}
+section#weather .graph div.wind[wind_range="1"]{
+    background-color: #ebf8e4ee;
+}
+section#weather .graph div.wind[wind_range="2"]{
+    background-color: #ebf8e4ee;
+}
+section#weather .graph div.wind[wind_range="3"]{
+    background-color: #ebf8e4ee;
+}
+section#weather .graph div.wind[wind_range="4"]{
+    background-color: #dcd3adee;
+}
+section#weather .graph div.wind[wind_range="5"]{
+    background-color: #c1b288ee;
+}
+section#weather .graph div.wind[wind_range="6"]{
+    background-color: #a69264ee;
+}
+section#weather .graph div.wind[wind_range="7"]{
+    background-color: #866c3aee;
+}
+section#weather .graph div.wind[wind_range="8"]{
+    background-color: #6c501bee;
+}
+section#weather .graph div.wind[wind_range="9"]{
+    background-color: #5a3c07ee;
+}
+section#weather .graph div.wind[wind_range="10"]{
+    background-color: #4c2e02ee;
+}
+section#weather .graph div.wind[wind_range="11"]{
+    background-color: #422702ee;
+}
+section#weather .graph div.wind[wind_range="12"]{
+    background-color: #3c2502ee;
+}
+section#weather .graph div.wind[wind_range="13"]{
+    background-color: #372402ee;
+}
+.weather_chart,
+.light_chart,
+.temp_chart {
+    position: relative;
+}
+.time_bar{
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    bottom: 0em;
+    width: 50%;
+    z-index: 0;
+}
+.weather_chart .time_bar {
+    background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(128,128,128,0) 50%,rgba(200,200,200,0.15) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    border-right: #ffffffee dotted 2px;
+}
+.light_chart .time_bar,
+.temp_chart .time_bar,
+.hourly_chart .time_bar {
+    z-index: 1;
+    border-right: #ffffffee dotted 2px;
+}
+header {
+    position: relative;
+}
+#today {
+    display: block;
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    text-align: left;
+    color: whitesmoke;
+    text-shadow: black 0.1em 0.1em 0.1em;
+    font-size: 1.4em;
+}
+#sunrise, #sunset, #date {
+    display: inline-block;
+}
+#sunrise, #sunset {
+    margin-left: 1em;
+}
+#sunrise::before,
+#sunset::before{
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height:1em;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#sunrise::before {
+    background-image: url(../images/morning.png);
+}
+#sunset::before {
+    background-image: url(../images/evening.png);
+}
+#time {
+    font-size: 2.5em;
+}
+#time, #sunrise, #sunset{
+    position: relative;
+}
+#time::after, #sunrise::after, #sunset::after{
+    font-size: 0.65em;
+    position: relative;
+    line-height: 0.75em;
+    bottom: 0.5em;
+    font-weight: normal;
+    padding-bottom: 0.01em;
+    border-bottom: #ffffff66 solid 0.2em;
+}
+#sunrise[unit="am"]::after, #sunset[unit="am"]::after{
+    border-bottom-color: #ff910066;
+}
+#sunrise[unit="pm"]::after, #sunset[unit="pm"]::after{
+    border-bottom-color: #00b7ff66;
+}
+.graph .temp.forecast {
+    opacity: 0.25;
+}
+.graph .temp.indoors {
+    opacity: 0.1;
+    z-index: 3;
+}
+.graph.indoors .temp.indoors {
+    opacity: 0.95;
+}
+.graph.indoors .temp.forecast {
+    opacity: 0.1;
+}

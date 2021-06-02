@@ -1,6 +1,6 @@
 <?php
 require_once("../../../../includes/main.php");
 $data = [];
-$data['forecast'] = Forecast::LoadForecast();
+$data['forecast'] = ForecastStamp(Forecast::LoadForecast());
 OutputJson($data);
 ?>

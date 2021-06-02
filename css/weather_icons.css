@@ -1,0 +1,58 @@
+/* clouds */
+[icon='01d']{
+    background-image: url(/plugins/NullWeather/img/web/01d.png);
+}
+[icon='02d']{
+    background-image: url(/plugins/NullWeather/img/web/02d.png);
+}
+[icon='03d']{
+    background-image: url(/plugins/NullWeather/img/web/03d.png);
+}
+[icon='04d']{
+    background-image: url(/plugins/NullWeather/img/web/04d.png);
+}
+[icon='01n']{
+    background-image: url(/plugins/NullWeather/img/web/01n.png);
+}
+[icon='02n']{
+    background-image: url(/plugins/NullWeather/img/web/02n.png);
+}
+[icon='03n']{
+    background-image: url(/plugins/NullWeather/img/web/03n.png);
+}
+[icon='04n']{
+    background-image: url(/plugins/NullWeather/img/web/04n.png);
+}
+/* rain */
+[icon='09d']{ /* clouds and rain */
+    background-image: url(/plugins/NullWeather/img/web/09d.png);
+}
+[icon='10d']{ /* rain and cloud and sun */
+    background-image: url(/plugins/NullWeather/img/web/10d.png);
+}
+[icon='11d']{ /* clouds and lightning */
+    background-image: url(/plugins/NullWeather/img/web/11d.png);
+}
+[icon='09n']{ /* clouds and rain */
+    background-image: url(/plugins/NullWeather/img/web/09n.png);
+}
+[icon='10n']{ /* rain and cloud and sun */
+    background-image: url(/plugins/NullWeather/img/web/10n.png);
+}
+[icon='11n']{ /* clouds and lightning */
+    background-image: url(/plugins/NullWeather/img/web/11n.png);
+}
+/* snow */
+[icon='13d']{
+    background-image: url(/plugins/NullWeather/img/web/13d.png);
+}
+[icon='13n']{
+    background-image: url(/plugins/NullWeather/img/web/13n.png);
+}
+/* haze */
+[icon='50d']{
+    background-image: url(/plugins/NullWeather/img/web/50d.png);
+}
+[icon='50n']{
+    background-image: url(/plugins/NullWeather/img/web/50n.png);
+}

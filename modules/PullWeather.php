@@ -13,7 +13,7 @@ class PullRemoteWeather {
         return $weather->PullWeather();
     }
     public static function GetLiveForecast(){
-        //echo "PullRemoteWeather::GetLiveForecast()\n";
+        echo "PullRemoteWeather::GetLiveForecast()\n";
         $weather = PullRemoteWeather::GetInstance();
         return $weather->PullForecast();
     }
@@ -32,6 +32,7 @@ class PullRemoteWeather {
         return $this->PullNullWeatherApi();
     }
     public function PullForecast(){
+        echo "PullRemoteWeather->PullForecast()\n";
         $forecast = null;
         if(Settings::LoadSettingsVar('main')) $forecast = $this->openWeatherMap->PullLiveForecastData();
         if(!is_null($forecast)) return $forecast;
@@ -41,7 +42,7 @@ class PullRemoteWeather {
 
 
     private function PullNullWeatherApi(){
-        //echo "PullRemoteWeather::PullNullWeatherApi()\n";
+        echo "PullRemoteWeather::PullNullWeatherApi()\n";
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
@@ -56,11 +57,15 @@ class PullRemoteWeather {
         return null;
     }
     private function PullNullWeatherForecastApi(){
+        echo "PullRemoteWeather::PullNullWeatherForecastApi()\n";
         $hub = Servers::GetHub();
+        print_r($hub);
         if(is_null($hub)) return null;
         $url = "http://".$hub['url']."/api/weather/?forecast=true";
+        echo "$url\n";
         $info = file_get_contents($url);
         $data = json_decode($info,true);
+        print_r($data);
         if(isset($data['forecast'])){
             foreach($data['forecast'] as $forecast){
                 Forecast::SaveForecast($forecast);

@@ -1,0 +1,26 @@
+{
+    "models":[
+        {
+            "name": "forecast",
+            "item_name": "forecast",
+            "type": "collection",
+            "api":"/plugins/NullWeather/api/forecast",
+            "item_id":"id",
+            "item_template":"/plugins/NullWeather/templates/items/forecast.html"
+        },
+        {
+            "name": "forecast_hourly",
+            "chart_name": "weather_chart",
+            "type": "hourly_chart",
+            "api":"/plugins/NullWeather/api/forecast/logs?hourly=1",
+            "item_id":"id"
+        },
+        {
+            "name": "weather_hourly",
+            "chart_name": "weather_chart",
+            "type": "hourly_chart",
+            "api":"/plugins/NullWeather/api/weather/logs?hourly=1",
+            "item_id":"id"
+        }
+    ]
+}

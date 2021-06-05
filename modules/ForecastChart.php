@@ -8,7 +8,19 @@ class ForecastChart {
     }
     public static function Averages(){
         $log = ForecastChart::GetInstance();
-        return $log->ForecastHourlyAveragesLog();
+        $data = $log->ForecastHourlyAveragesLog();
+        $fields = ["main","description"];
+        foreach($fields as $field){
+            for($i = 0; $i < count($data); $i++){
+                if(isset($data[$i][$field]) && count($data[$i][$field]) > 0){
+                    foreach($data[$i][$field] as $value => $count){
+                        $data[$i][$field] = $value;
+                        break;
+                    }
+                }
+            }    
+        }
+        return $data;
     }
     public static function Temps(){
         $log = ForecastChart::GetInstance();
@@ -111,9 +123,9 @@ class ForecastChart {
             $averages['clouds'] += $h['clouds'];
             $averages['temp'] += $h['temp'];
             $averages['temp_max'] += $h['temp_max'];
-            if($max_temp < $h['temp_max']) $max_temp = $h['temp_max'];
+            if($max_temp < $h['temp_max']) $max_temp = (float)$h['temp_max'];
             $averages['temp_min'] += $h['temp_min'];
-            if($min_temp > $h['temp_min']) $min_temp = $h['temp_min'];
+            if($min_temp > $h['temp_min']) $min_temp = (float)$h['temp_min'];
             $averages['feels_like'] += $h['feels_like'];
             $averages['humidity'] += $h['humidity'];
             $averages['pressure'] += $h['pressure'];
@@ -156,6 +168,7 @@ class ForecastChart {
                 $i_count = $value;
             }
         }
+        unset($averages['icons']);
         return $averages;
     }
 

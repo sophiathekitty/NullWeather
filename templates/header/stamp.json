@@ -1,0 +1,20 @@
+{
+    "models":[
+        {
+            "name": "current",
+            "item_name": "current",
+            "type": "model",
+            "api":"/plugins/NullWeather/api/weather",
+            "item_id":"id",
+            "cache_time":5
+        },
+        {
+            "name": "weather_hourly",
+            "chart_name": "weather_chart",
+            "type": "hourly_chart",
+            "api":"/plugins/NullWeather/api/weather/logs",
+            "cache_time":5,
+            "item_id":"id"
+        }
+    ]
+}

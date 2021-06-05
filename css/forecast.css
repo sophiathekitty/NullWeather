@@ -247,16 +247,16 @@ section#weather nav a[filter="clouds"]::before {
     background-size: contain;
 }
 section#weather nav a[filter="temp"]::before{
-    background-image: url(../app/img/actions/thermometer-scale.png);
+    background-image: url(/plugins/NullWeather/img/web/temperature.png);
 }
 section#weather nav a[filter="humidity"]::before{
-    background-image: url(../app/img/raining.png);
+    background-image: url(/plugins/NullWeather/img/web/rain.png);
 }
 section#weather nav a[filter="wind"]::before{
-    background-image: url(../images/weather/wind.png);
+    background-image: url(/plugins/NullWeather/img/web/wind.png);
 }
 section#weather nav a[filter="clouds"]::before{
-    background-image: url(../images/weather/clouds.png);
+    background-image: url(/plugins/NullWeather/img/web/clouds.png);
 }
 section#weather div.weather_chart .hour {
     flex-grow: 1;

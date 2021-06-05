@@ -6,6 +6,7 @@
             "type": "collection",
             "api":"/plugins/NullWeather/api/forecast",
             "item_id":"id",
+            "cache_time":5,
             "item_template":"/plugins/NullWeather/templates/items/forecast.html"
         },
         {
@@ -13,6 +14,7 @@
             "chart_name": "weather_chart",
             "type": "hourly_chart",
             "api":"/plugins/NullWeather/api/forecast/logs?hourly=1",
+            "cache_time":5,
             "item_id":"id"
         },
         {
@@ -20,6 +22,7 @@
             "chart_name": "weather_chart",
             "type": "hourly_chart",
             "api":"/plugins/NullWeather/api/weather/logs?hourly=1",
+            "cache_time":5,
             "item_id":"id"
         }
     ]

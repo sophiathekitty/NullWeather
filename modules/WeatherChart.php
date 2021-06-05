@@ -8,7 +8,19 @@ class WeatherChart {
     }
     public static function Weather(){
         $chart = WeatherChart::GetInstance();
-        return $chart->WeatherHourlyAveragesLog();
+        $data = $chart->WeatherHourlyAveragesLog();
+        $fields = ["main","description"];
+        foreach($fields as $field){
+            for($i = 0; $i < count($data); $i++){
+                if(isset($data[$i][$field]) && count($data[$i][$field]) > 0){
+                    foreach($data[$i][$field] as $value => $count){
+                        $data[$i][$field] = $value;
+                        break;
+                    }
+                }
+            }    
+        }
+        return $data;
     }
     public static function Temp(){
         $chart = WeatherChart::GetInstance();
@@ -129,6 +141,7 @@ class WeatherChart {
                 $i_count = $value;
             }
         }
+        unset($averages['icons']);
         return $averages;
     }
     

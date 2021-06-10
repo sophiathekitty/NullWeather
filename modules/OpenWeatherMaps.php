@@ -34,7 +34,10 @@ class OpenWeatherMap {
         $units = Settings::LoadSettingsVar('weather_units',"imperial");
         $url = "http://api.openweathermap.org/data/2.5/weather?q=$city&units=$units&appid=$api_key";
         $info = file_get_contents($url);
-        return $this->OpenWeatherMapApiToNullWeather(json_decode($info));
+        $data = json_decode($info);
+        // grab sunrise data
+        print_r($data);
+        return $this->OpenWeatherMapApiToNullWeather($data);
     }
     private function PullOpenWeatherMapForecastApi(){
         $api_key = Settings::LoadSettingsVar('weather_api_key');

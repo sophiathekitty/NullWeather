@@ -26,7 +26,28 @@ class WeatherChart {
         $chart = WeatherChart::GetInstance();
         return $chart->WeatherHourlyTempLog();
     }
+    public static function Ranges($chart){
+        $ranges = [
+            'temp' => ['min'=>10000,'max'=>0],
+            'hum' => ['min'=>10000,'max'=>0],
+            'wind_speed' => ['min'=>10000,'max'=>0],
+            'clouds' => ['min'=>10000,'max'=>0]
+        ];
+        for($i = 0; $i < 24; $i++){
+            if($ranges['temp']['min'] > $chart[$i]['temp_min']) $ranges['temp']['min'] = $chart[$i]['temp_min'];
+            if($ranges['temp']['max'] < $chart[$i]['temp_max']) $ranges['temp']['max'] = $chart[$i]['temp_max'];
 
+            if($ranges['hum']['min'] > $chart[$i]['min_hum']) $ranges['hum']['min'] = $chart[$i]['min_hum'];
+            if($ranges['hum']['max'] < $chart[$i]['max_hum']) $ranges['hum']['max'] = $chart[$i]['max_hum'];
+
+            if($ranges['wind_speed']['min'] > $chart[$i]['min_wind']) $ranges['wind_speed']['min'] = $chart[$i]['min_wind'];
+            if($ranges['wind_speed']['max'] < $chart[$i]['max_wind']) $ranges['wind_speed']['max'] = $chart[$i]['max_wind'];
+
+            if($ranges['clouds']['min'] > $chart[$i]['min_clouds']) $ranges['clouds']['min'] = $chart[$i]['min_clouds'];
+            if($ranges['clouds']['max'] < $chart[$i]['max_clouds']) $ranges['clouds']['max'] = $chart[$i]['max_clouds'];
+        }
+        return $ranges;
+    }
     function WeatherHourlyTempLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){

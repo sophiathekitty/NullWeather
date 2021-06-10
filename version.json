@@ -1,0 +1,6 @@
+{
+    "name":"Null Weather",
+    "version":"0.1",
+    "git":"https://github.com/sophiathekitty/NullWeather/",
+    "local":"/var/www/html/plugins/NullWeather"
+}

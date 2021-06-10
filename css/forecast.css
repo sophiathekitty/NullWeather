@@ -5,6 +5,7 @@ section#weather #forecast {
 }
 
 section#weather {
+    display: block;
     position: relative;
     background: linear-gradient(to bottom, #6660 0%, #666d 10%, #666 100%);
 }
@@ -368,6 +369,7 @@ section#weather .hour .temperature {
 section#weather .forecast_holder {
     overflow-x: scroll;
     padding-bottom: 0px;
+    max-width: 98vw;
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2c539e+0,2c539e+100&1+0,0+100;Blue+3D+%232 */
     background: -moz-linear-gradient(top,  rgba(44,83,158,1) 0%, rgba(44,83,158,0) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top,  rgba(44,83,158,1) 0%,rgba(44,83,158,0) 100%); /* Chrome10-25,Safari5.1-6 */

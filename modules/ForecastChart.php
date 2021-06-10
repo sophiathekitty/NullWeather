@@ -26,6 +26,16 @@ class ForecastChart {
         $log = ForecastChart::GetInstance();
         return $log->ForecastHourlyTempLog();
     }
+    public static function Ranges($chart){
+        $ranges = [
+            'temp' => ['min'=>10000,'max'=>0]
+        ];
+        for($i = 0; $i < 24; $i++){
+            if($ranges['temp']['min'] > $chart[$i]['temp_min']) $ranges['temp']['min'] = $chart[$i]['temp_min'];
+            if($ranges['temp']['max'] < $chart[$i]['temp_max']) $ranges['temp']['max'] = $chart[$i]['temp_max'];
+        }
+        return $ranges;
+    }
     function ForecastHourlyTempLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){

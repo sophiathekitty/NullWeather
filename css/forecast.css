@@ -7,7 +7,7 @@ section#weather #forecast {
 section#weather {
     display: block;
     position: relative;
-    background: linear-gradient(to bottom, #6660 0%, #666d 10%, #666 100%);
+    /*background: linear-gradient(to bottom, #6660 0%, #666d 10%, #666 100%);*/
 }
 section#weather div#forecast {
     display: flex;

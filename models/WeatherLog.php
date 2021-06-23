@@ -1,4 +1,5 @@
 <?php
+define('WeatherPlugin',true);
 
 class WeatherLogs extends clsModel {
     public $table_name = "WeatherLogs";
@@ -108,6 +109,10 @@ class WeatherLogs extends clsModel {
         if(is_null(WeatherLogs::$logs)) WeatherLogs::$logs = new WeatherLogs();
         return WeatherLogs::$logs;
     }
+    public static function AllWeather(){
+        $weather = WeatherLogs::GetInstance();
+        return $weather->LoadAll();
+    }
     public static function CurrentWeather(){
         $weather = WeatherLogs::GetInstance();
         return $weather->LoadWhere(null,['created'=>"DESC"]);
@@ -115,6 +120,12 @@ class WeatherLogs extends clsModel {
     public static function RecentWeather($seconds){
         $weather = WeatherLogs::GetInstance();
         $rows = $weather->LoadFieldAfter('created',date("Y-m-d H:i:s",time()-$seconds));
+        if(count($rows)) return $rows;
+        return null;
+    }
+    public static function Date($date){
+        $weather = WeatherLogs::GetInstance();
+        $rows = $weather->LoadFieldBetween('created',"$date 00:00:00","$date 23:59:59");
         if(count($rows)) return $rows;
         return null;
     }

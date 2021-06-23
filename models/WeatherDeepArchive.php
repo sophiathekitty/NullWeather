@@ -117,10 +117,15 @@ class WeatherArchivesMonthly extends clsModel {
             'Extra'=>""
         ]
     ];
-    public static $archives = null;
-    public static function GetInstance(){
+    private static $archives = null;
+    private static function GetInstance(){
         if(is_null(WeatherArchivesMonthly::$archives)) WeatherArchivesMonthly::$archives = new WeatherArchivesMonthly();
         return WeatherArchivesMonthly::$archives;
+    }
+    public static function SaveArchive($data){
+        $archives = WeatherArchivesMonthly::GetInstance();
+        $data = $archives->CleanDataSkipFields("id",$data);
+        return $archives->Save($data);
     }
 }
 if(defined('VALIDATE_TABLES')){

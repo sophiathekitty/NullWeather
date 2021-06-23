@@ -117,10 +117,15 @@ class WeatherArchivesDaily extends clsModel {
             'Extra'=>""
         ]
     ];
-    public static $archives = null;
-    public static function GetInstance(){
+    private static $archives = null;
+    private static function GetInstance(){
         if(is_null(WeatherArchivesDaily::$archives)) WeatherArchivesDaily::$archives = new WeatherArchivesDaily();
         return WeatherArchivesDaily::$archives;
+    }
+    public static function SaveArchive($data){
+        $archives = WeatherArchivesDaily::GetInstance();
+        $data = $archives->CleanDataSkipFields("id",$data);
+        return $archives->Save($data);
     }
 }
 if(defined('VALIDATE_TABLES')){

@@ -4,19 +4,22 @@ class WeatherAverages{
         $logs = Forecast::LoadForecast();
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
-    public static function WeatherAverages(){
+    public static function GetWeatherAverages(){
         $logs = WeatherLogs::AllWeather();
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
+    
     public static function WeatherAveragesDate($date){
         $logs = WeatherLogs::Date($date);
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
+    
     public static function CombinedWeatherAverages(){
         $logs = Forecast::LoadForecast();
         $logs = array_merge($logs,WeatherLogs::AllWeather());
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
+    
     public static function CalculateAverageWeatherLogs($data){
         $averages = [      
             "main" => [],
@@ -129,6 +132,7 @@ class WeatherAverages{
         $averages['description'] = $descriptions;
         return $averages;
     }
+    
 }
 
 function sort_by_percent($a, $b) {

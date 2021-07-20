@@ -120,6 +120,10 @@ class Forecast extends clsModel {
         $forecast = Forecast::GetForecastInstance();
         return $forecast->LoadFieldHour('datetime',$h);
     }
+    public static function LoadForecastDay($date){
+        $forecast = Forecast::GetForecastInstance();
+        return $forecast->LoadFieldBetween('datetime',$date." 00:00:00",$date." 23:59:59");
+    }
     public static function SaveForecast($forecast){
         Forecast::Prune();
         $instance = Forecast::GetForecastInstance();

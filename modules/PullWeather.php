@@ -46,7 +46,10 @@ class PullRemoteWeather {
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
-        $url = "http://".$hub['url']."/api/weather/";
+        if($hub['type'] == "old_hub")
+            $url = "http://".$hub['url']."/api/weather/";
+        else
+            $url = "http://".$hub['url']."/plugins/NullWeather/api/weather/";
         $info = file_get_contents($url);
         $data = json_decode($info,true);
         //print_r($data['daytime']);
@@ -71,7 +74,10 @@ class PullRemoteWeather {
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
-        $url = "http://".$hub['url']."/api/weather/?forecast=true";
+        if($hub['type'] == "old_hub")
+            $url = "http://".$hub['url']."/api/weather/?forecast=true";
+        else
+            $url = "http://".$hub['url']."/plugins/NullWeather/api/forecast/";
         echo "$url\n";
         $info = file_get_contents($url);
         $data = json_decode($info,true);

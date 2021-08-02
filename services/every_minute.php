@@ -1,3 +1,6 @@
 <?php
-// this code should run every minute on the minute. the main app should do all the including and find and run these automatically
+echo "NullWeather::Pull Weather and Forecast\n";
+Settings::SaveSettingsVar("service::weather_pulled",date("H:i:s"));
+PullRemoteWeather::GetLiveWeather();
+PullRemoteWeather::GetLiveForecast();
 ?>

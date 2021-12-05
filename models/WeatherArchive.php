@@ -123,9 +123,14 @@ class WeatherArchivesDaily extends clsModel {
         return WeatherArchivesDaily::$archives;
     }
     public static function SaveArchive($data){
+        WeatherArchivesDaily::Prune();
         $archives = WeatherArchivesDaily::GetInstance();
         $data = $archives->CleanDataSkipFields("id",$data);
         return $archives->Save($data);
+    }
+    public static function Prune(){
+        $instance = WeatherArchivesDaily::GetInstance();
+        $instance->PruneField('created',WeeksToDays(Settings::LoadSettingsVar('weather_archive_weeks',5)));
     }
 }
 if(defined('VALIDATE_TABLES')){

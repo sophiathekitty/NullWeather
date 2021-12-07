@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * depreciated?
+ * i don't think i ever really got the color lerping working in php.
+ * contained a missing function that i've commented out
+ */
 class WeatherColor {
     
 
@@ -97,7 +101,7 @@ class WeatherColor {
         }
         $amount = ($temp - ($min*10))/10;
         //echo "{ $amount || $temp || $min || $max }";
-        return ColorLerp($temp_colors[$min],$temp_colors[$max],$amount);
+        //return ColorLerp($temp_colors[$min],$temp_colors[$max],$amount);
     }
     function TemperatureBackgroundColor($temp){
         $color = $this->TemperatureColor($temp);
@@ -110,7 +114,7 @@ class WeatherColor {
             Colors::GetColor('hum_max','weather','#054a7f')
         ];
         $amount = $hum / 100;
-        return ColorLerp($hum_colors[0],$hum_colors[1],$amount);
+        //return ColorLerp($hum_colors[0],$hum_colors[1],$amount);
     }
     function HumBackgroundColor($hum){
         $color = $this->HumColor($hum);
@@ -122,7 +126,7 @@ class WeatherColor {
             Colors::GetColor('wind_max','weather','#372402')
         ];
         $amount = $wind / 50;
-        return ColorLerp($wind_colors[0],$wind_colors[1],$amount);
+        //return ColorLerp($wind_colors[0],$wind_colors[1],$amount);
     }
     function WindBackgroundColor($wind){
         $color = $this->WindColor($wind);

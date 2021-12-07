@@ -1,17 +1,27 @@
 <?php
-
+/**
+ * pulls the weather for either OpenWeatherMap or the main hub
+ */
 class PullRemoteWeather {
-    public  static $weather = null;
-    public static function GetInstance(){
+    private static $weather = null;
+    private static function GetInstance(){
         if(is_null(PullRemoteWeather::$weather)) PullRemoteWeather::$weather = new PullRemoteWeather();
         return PullRemoteWeather::$weather;
     }
+    /**
+     * pulls weather if it's been longer than weather_pull_delay since last pulled
+     * @return array returns the current weather
+     */
     public static function GetLiveWeather(){
         $weather = PullRemoteWeather::GetInstance();
         $recent = WeatherLogs::RecentWeather(MinutesToSeconds(Settings::LoadSettingsVar('weather_pull_delay',5)));
         if(count($recent)) return WeatherLogs::CurrentWeather();
         return $weather->PullWeather();
     }
+    /**
+     * pulls live forecast data
+     * @return array returns the latest forecast data
+     */
     public static function GetLiveForecast(){
         echo "PullRemoteWeather::GetLiveForecast()\n";
         $weather = PullRemoteWeather::GetInstance();
@@ -24,6 +34,10 @@ class PullRemoteWeather {
     {
         $this->openWeatherMap = new OpenWeatherMap();
     }
+    /**
+     * if main will attempt to pull from open weather map otherwise will pull from null api
+     * @return array current weather data
+     */
     public function PullWeather(){
         echo "PullRemoteWeather::PullWeather()\n";
         $weather = null;
@@ -31,6 +45,10 @@ class PullRemoteWeather {
         if(!is_null($weather)) return $weather;
         return $this->PullNullWeatherApi();
     }
+    /**
+     * if main will attempt to pull from open weather map otherwise will pull from null api
+     * @return array current forecast data
+     */
     public function PullForecast(){
         echo "PullRemoteWeather->PullForecast()\n";
         $forecast = null;
@@ -40,7 +58,10 @@ class PullRemoteWeather {
     }
 
 
-
+    /**
+     * pull weather data from null api and saves it to the database
+     * @return array returns the current weather data
+     */
     private function PullNullWeatherApi(){
         echo "PullRemoteWeather::PullNullWeatherApi()\n";
         $hub = Servers::GetHub();
@@ -69,6 +90,10 @@ class PullRemoteWeather {
         
         return null;
     }
+    /**
+     * pull forecast data from null api and saves it to the database
+     * @return array returns the current forecast data
+     */
     private function PullNullWeatherForecastApi(){
         echo "PullRemoteWeather::PullNullWeatherForecastApi()\n";
         $hub = Servers::GetHub();

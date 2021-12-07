@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * a monthly archive of weather data for long term storage.
+ * looks like it's planning to create a new entry every time it saves a month.
+ * might have it use month as the primary key and have it average them together
+ * that 
+ */
 class WeatherArchivesMonthly extends clsModel {
     public $table_name = "WeatherArchivesMonthly";
     public $fields = [
@@ -118,10 +123,17 @@ class WeatherArchivesMonthly extends clsModel {
         ]
     ];
     private static $archives = null;
+    /**
+     * @return WeatherArchivesMonthly|clsModel
+     */
     private static function GetInstance(){
         if(is_null(WeatherArchivesMonthly::$archives)) WeatherArchivesMonthly::$archives = new WeatherArchivesMonthly();
         return WeatherArchivesMonthly::$archives;
     }
+    /**
+     * save an archive
+     * @param array $data the keyed data array to save
+     */
     public static function SaveArchive($data){
         $archives = WeatherArchivesMonthly::GetInstance();
         $data = $archives->CleanDataSkipFields("id",$data);

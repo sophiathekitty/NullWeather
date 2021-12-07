@@ -1,4 +1,8 @@
 <?php
+/**
+ * rounds the values to whole numbers and adds day of week (Mon) and time (5am)
+ * @param array $forecast the forecast data to be parsed
+ */
 function ForecastStamp($forecast){
     $days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     for($i = 0; $i < count($forecast); $i++){
@@ -17,6 +21,11 @@ function ForecastStamp($forecast){
     }
     return $forecast;
 }
+/**
+ * does an average of the hourly forecast data for a daily forecast
+ * once i start pulling the one call this might not be needed
+ * @param string $date the date to create a forecast average of
+ */
 function ForecastDay($date){
     $forecast = Forecast::LoadForecastDay($date);
     $averages = [

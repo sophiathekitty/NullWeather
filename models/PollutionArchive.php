@@ -23,6 +23,9 @@ class PollutionArchive extends clsModel {
         ]
     ];
     private static $instance = null;
+    /**
+     * @return PollutionArchive|clsModel
+     */
     private static function GetInstance(){
         if(is_null(PollutionArchive::$instance)) PollutionArchive::$instance = new PollutionArchive();
         return PollutionArchive::$instance;

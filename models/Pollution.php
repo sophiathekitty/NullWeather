@@ -78,6 +78,9 @@ class Pollution extends clsModel {
         ]
     ];
     private static $instance = null;
+    /**
+     * @return Pollution|clsModel
+     */
     private static function GetInstance(){
         if(is_null(Pollution::$instance)) Pollution::$instance = new Pollution();
         return Pollution::$instance;

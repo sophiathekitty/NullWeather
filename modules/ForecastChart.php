@@ -1,11 +1,20 @@
 <?php
-
+/**
+ * tools for generating an hourly chart of forecast data
+ */
 class ForecastChart {
     private static $log = null;
+    /**
+     * @return ForecastChart
+     */
     private static function GetInstance(){
         if(is_null(ForecastChart::$log)) ForecastChart::$log = new ForecastChart();
         return ForecastChart::$log;
     }
+    /**
+     * calculate the averages for all the forecast data
+     * @return array an array containing hourly averages of forecast data
+     */
     public static function Averages(){
         $log = ForecastChart::GetInstance();
         $data = $log->ForecastHourlyAveragesLog();
@@ -22,10 +31,19 @@ class ForecastChart {
         }
         return $data;
     }
+    /**
+     * calculate the averages temperature from forecasts
+     * @return array an array containing hourly averages temperature from forecasts
+     */
     public static function Temps(){
         $log = ForecastChart::GetInstance();
         return $log->ForecastHourlyTempLog();
     }
+    /**
+     * calculates the temperature ranges for a forecast hourly chart
+     * @param array $chart
+     * @return array ['temp' => ['min'=>10000,'max'=>0]]
+     */
     public static function Ranges($chart){
         $ranges = [
             'temp' => ['min'=>10000,'max'=>0]
@@ -36,6 +54,10 @@ class ForecastChart {
         }
         return $ranges;
     }
+    /**
+     * calculate the averages temperature from forecasts
+     * @return array an array containing hourly averages temperature from forecasts
+     */
     function ForecastHourlyTempLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){
@@ -43,7 +65,10 @@ class ForecastChart {
         }
         return $weatherLog;
     }
-
+    /**
+     * calculate the averages from forecasts
+     * @return array an array containing hourly averages from forecasts
+     */
     function ForecastHourlyAveragesLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){
@@ -51,7 +76,11 @@ class ForecastChart {
         }
         return $weatherLog;
     }
-
+    /**
+     * calculate the averages from forecasts
+     * @param int $hour the hour to average
+     * @return array an array containing hourly averages from forecasts
+     */
     function ForecastHourlyAverage($hour){
         $data = Forecast::LoadForecastHour($hour);
         if(count($data) == 0){
@@ -132,10 +161,10 @@ class ForecastChart {
             }
             $averages['clouds'] += $h['clouds'];
             $averages['temp'] += $h['temp'];
-            $averages['temp_max'] += $h['temp_max'];
-            if($max_temp < $h['temp_max']) $max_temp = (float)$h['temp_max'];
-            $averages['temp_min'] += $h['temp_min'];
-            if($min_temp > $h['temp_min']) $min_temp = (float)$h['temp_min'];
+            //$averages['temp_max'] += $h['temp_max'];
+            if($max_temp < $h['temp']) $max_temp = (float)$h['temp'];
+            //$averages['temp_min'] += $h['temp_min'];
+            if($min_temp > $h['temp']) $min_temp = (float)$h['temp'];
             $averages['feels_like'] += $h['feels_like'];
             $averages['humidity'] += $h['humidity'];
             $averages['pressure'] += $h['pressure'];
@@ -181,8 +210,11 @@ class ForecastChart {
         unset($averages['icons']);
         return $averages;
     }
-
-
+    /**
+     * calculate the averages temperature from forecasts
+     * @param int $hour the hour to average
+     * @return array an array containing hourly averages from forecasts
+     */
     function ForecastHourlyTemp($hour){
         $data = Forecast::LoadForecastHour($hour);
         if(count($data) == 0){

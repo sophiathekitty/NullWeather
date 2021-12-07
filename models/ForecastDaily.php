@@ -2,16 +2,16 @@
 /**
  * hourly forecast
  */
-class Forecast extends clsModel {
-    public $table_name = "Forecast";
+class ForecastDaily extends clsModel {
+    public $table_name = "ForecastDaily";
     public $fields = [
         [
-            'Field'=>"id",
-            'Type'=>"int(11)",
+            'Field'=>"datetime",
+            'Type'=>"datetime",
             'Null'=>"NO",
             'Key'=>"PRI",
             'Default'=>"",
-            'Extra'=>"auto_increment"
+            'Extra'=>""
         ],[
             'Field'=>"main",
             'Type'=>"varchar(10)",
@@ -34,7 +34,28 @@ class Forecast extends clsModel {
             'Default'=>"0",
             'Extra'=>""
         ],[
-            'Field'=>"temp",
+            'Field'=>"temp_day",
+            'Type'=>"double",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"temp_night",
+            'Type'=>"double",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"temp_eve",
+            'Type'=>"double",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"temp_morn",
             'Type'=>"double",
             'Null'=>"NO",
             'Key'=>"",
@@ -55,7 +76,28 @@ class Forecast extends clsModel {
             'Default'=>null,
             'Extra'=>""
         ],[
-            'Field'=>"feels_like",
+            'Field'=>"feels_like_day",
+            'Type'=>"double",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"feels_like_night",
+            'Type'=>"double",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"feels_like_eve",
+            'Type'=>"double",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"feels_like_morn",
             'Type'=>"double",
             'Null'=>"NO",
             'Key'=>"",
@@ -97,8 +139,36 @@ class Forecast extends clsModel {
             'Default'=>"",
             'Extra'=>""
         ],[
-            'Field'=>"datetime",
+            'Field'=>"sunrise",
             'Type'=>"datetime",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"sunset",
+            'Type'=>"datetime",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"moonrise",
+            'Type'=>"datetime",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"moonset",
+            'Type'=>"datetime",
+            'Null'=>"NO",
+            'Key'=>"",
+            'Default'=>"",
+            'Extra'=>""
+        ],[
+            'Field'=>"moon_phase",
+            'Type'=>"double",
             'Null'=>"NO",
             'Key'=>"",
             'Default'=>"",
@@ -107,18 +177,18 @@ class Forecast extends clsModel {
     ];
     private static $forecast = null;
     /**
-     * @return Forecast|clsModel
+     * @return ForecastDaily|clsModel
      */
     private static function GetForecastInstance(){
-        if(is_null(Forecast::$forecast)) Forecast::$forecast = new Forecast();
-        return Forecast::$forecast;
+        if(is_null(ForecastDaily::$forecast)) ForecastDaily::$forecast = new ForecastDaily();
+        return ForecastDaily::$forecast;
     }
     /**
      * load all the forecast data
      * @return array an array of forecast data $forecast[0]['temp']
      */
     public static function LoadForecast(){
-        $forecast = Forecast::GetForecastInstance();
+        $forecast = ForecastDaily::GetForecastInstance();
         return $forecast->LoadAll();
     }
     /**
@@ -126,7 +196,7 @@ class Forecast extends clsModel {
      * @return array an array of forecast data $forecast[0]['temp']
      */
     public static function LoadUpcomingForecast(){
-        $forecast = Forecast::GetForecastInstance();
+        $forecast = ForecastDaily::GetForecastInstance();
         return $forecast->LoadFieldBefore("datetime",date("Y-m-d H:i:s",time()+DaysToSeconds(2)));
     }
     /**
@@ -134,7 +204,7 @@ class Forecast extends clsModel {
      * @return array an array of forecast data $forecast[0]['temp']
      */
     public static function LoadForecastHour($h){
-        $forecast = Forecast::GetForecastInstance();
+        $forecast = ForecastDaily::GetForecastInstance();
         return $forecast->LoadFieldHour('datetime',$h);
     }
     /**
@@ -142,7 +212,7 @@ class Forecast extends clsModel {
      * @return array an array of forecast data $forecast[0]['temp']
      */
     public static function LoadForecastDay($date){
-        $forecast = Forecast::GetForecastInstance();
+        $forecast = ForecastDaily::GetForecastInstance();
         return $forecast->LoadFieldBetween('datetime',$date." 00:00:00",$date." 23:59:59");
     }
     /**
@@ -151,7 +221,7 @@ class Forecast extends clsModel {
      */
     public static function SaveForecast($forecast){
         Forecast::Prune();
-        $instance = Forecast::GetForecastInstance();
+        $instance = ForecastDaily::GetForecastInstance();
         $forecast = $instance->CleanData($forecast);
         $row = $instance->LoadWhere(['datetime'=>$forecast['datetime']]);
         if(is_null($row)){
@@ -164,11 +234,11 @@ class Forecast extends clsModel {
      * prunes the forecast data that's past the current time
      */
     public static function Prune(){
-        $forecast = Forecast::GetForecastInstance();
+        $forecast = ForecastDaily::GetForecastInstance();
         $forecast->PruneField('datetime',0);
     }
 }
 if(defined('VALIDATE_TABLES')){
-    clsModel::$models[] = new Forecast();
+    clsModel::$models[] = new ForecastDaily();
 }
 ?>

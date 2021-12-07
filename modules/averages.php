@@ -1,25 +1,46 @@
 <?php
+/**
+ * calculates the averages for the weather and forecast data
+ * could probably just extend the HourlyChart class and have it do the averaging with the full data sets instead of the hour sets
+ * and maybe i could have the HourlyChart do the sorted list of strings paired with their count
+ */
 class WeatherAverages{
+    /**
+     * calculates the averages of the forecast data
+     */
     public static function ForecastWeatherAverages(){
         $logs = Forecast::LoadForecast();
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
+    /**
+     * calculates the averages of the weather data
+     */
     public static function GetWeatherAverages(){
         $logs = WeatherLogs::AllWeather();
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
-    
+    /**
+     * calculates the averages of the weather on a specific date
+     * @param string $date the date YYYY-MM-DD
+     */    
     public static function WeatherAveragesDate($date){
         $logs = WeatherLogs::Date($date);
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
-    
+    /**
+     * combines the weather and forecast data and finds the averages
+     */
     public static function CombinedWeatherAverages(){
         $logs = Forecast::LoadForecast();
         $logs = array_merge($logs,WeatherLogs::AllWeather());
         return WeatherAverages::CalculateAverageWeatherLogs($logs);
     }
-    
+    /**
+     * calculates the averages for the weather and forecast data.
+     * i have a generic version of this in the HourlyChart class. 
+     * i could make that version include arrays of strings
+     * @param array $data the weather/forecast data to be averaged
+     */
     public static function CalculateAverageWeatherLogs($data){
         $averages = [      
             "main" => [],
@@ -134,7 +155,10 @@ class WeatherAverages{
     }
     
 }
-
+/**
+ * $icons[0]['percent'];
+ * usort($icons,'sort_by_percent');
+ */
 function sort_by_percent($a, $b) {
 	if($a['percent'] == $b['percent']){ return 0 ; }
 	return ($a['percent'] < $b['percent']) ? 1 : -1;

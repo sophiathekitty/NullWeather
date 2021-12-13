@@ -195,6 +195,14 @@ class ForecastDaily extends clsModel {
      * load the next two days of forecast data
      * @return array an array of forecast data $forecast[0]['temp']
      */
+    public static function LoadTodayForecast(){
+        $forecast = ForecastDaily::GetForecastInstance();
+        return $forecast->LoadWhere(null,['datetime'=>'ASC']);
+    }
+    /**
+     * load the next two days of forecast data
+     * @return array an array of forecast data $forecast[0]['temp']
+     */
     public static function LoadUpcomingForecast(){
         $forecast = ForecastDaily::GetForecastInstance();
         return $forecast->LoadFieldBefore("datetime",date("Y-m-d H:i:s",time()+DaysToSeconds(2)));
@@ -220,7 +228,7 @@ class ForecastDaily extends clsModel {
      * @param array $forecast the forecast entry data array $forecast['temp]
      */
     public static function SaveForecast($forecast){
-        Forecast::Prune();
+        ForecastDaily::Prune();
         $instance = ForecastDaily::GetForecastInstance();
         $forecast = $instance->CleanData($forecast);
         $row = $instance->LoadWhere(['datetime'=>$forecast['datetime']]);
@@ -235,7 +243,7 @@ class ForecastDaily extends clsModel {
      */
     public static function Prune(){
         $forecast = ForecastDaily::GetForecastInstance();
-        $forecast->PruneField('datetime',0);
+        $forecast->PruneField('datetime',DaysToSeconds(0));
     }
 }
 if(defined('VALIDATE_TABLES')){

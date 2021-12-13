@@ -7,6 +7,8 @@ section#weather #forecast {
 section#weather {
     display: block;
     position: relative;
+    width: 100%;
+    overflow: hidden;
     /*background: linear-gradient(to bottom, #6660 0%, #666d 10%, #666 100%);*/
 }
 section#weather div#forecast {
@@ -24,26 +26,27 @@ section#weather div#forecast {
 }
 section#weather div#forecast .forecast {
     display: block;
-    background-position: 1.5em 1em;
-    background-size: 4.20em;
+    background-position: top center;
+    background-size: 3em;
     background-repeat: no-repeat;
     margin: 0.1em;
     padding-left: 0.1em;
-    padding-top: 4.20em;
+    padding-top: 3.20em;
     width: 7.10em;
     min-width: 7.10em;
-    font-size: 1.25em;
+    font-size: 0.75em;
     text-align: center;
     border-left: dashed #00000066 thin;
     margin-bottom: 0em;
 }
+section#weather div#forecast_daily .forecast_daily .day,
 section#weather div#forecast .forecast .day{
     margin-left: -0.1em;
     margin-right: -0.2em;
-    font-family: 'Sansation';
     font-weight: bold;
     color: azure;
 }
+section#weather div#forecast_daily .forecast_daily[day="Sun"] .day,
 section#weather div#forecast .forecast[day="Sun"] .time{
     color: rgba(108,169,201,1);
 }
@@ -54,6 +57,7 @@ section#weather div#forecast .forecast[day="Sun"] .day{
     background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(108,169,201,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#6ca9c9',GradientType=0 ); /* IE6-9 */
 }
+section#weather div#forecast_daily .forecast_daily[day="Mon"] .day,
 section#weather div#forecast .forecast[day="Mon"] .time{
     color: rgba(106,196,106,1);
 }
@@ -64,6 +68,7 @@ section#weather div#forecast .forecast[day="Mon"] .day{
     background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(106,196,106,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#6ac46a',GradientType=0 ); /* IE6-9 */
 }
+section#weather div#forecast_daily .forecast_daily[day="Tue"] .day,
 section#weather div#forecast .forecast[day="Tue"] .time{
     color: rgba(209,193,115,1);
 }
@@ -74,6 +79,7 @@ section#weather div#forecast .forecast[day="Tue"] .day {
     background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(209,193,115,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#d1c173',GradientType=0 ); /* IE6-9 */
 }
+section#weather div#forecast_daily .forecast_daily[day="Wed"] .day,
 section#weather div#forecast .forecast[day="Wed"] .time{
     color: rgba(216,121,177,1);
 }
@@ -84,6 +90,7 @@ section#weather div#forecast .forecast[day="Wed"] .day{
     background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(216,121,177,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#d879b1',GradientType=0 ); /* IE6-9 */
 }
+section#weather div#forecast_daily .forecast_daily[day="Thu"] .day,
 section#weather div#forecast .forecast[day="Thu"] .time{
     color: rgba(148,123,216,1);
 }
@@ -94,6 +101,7 @@ section#weather div#forecast .forecast[day="Thu"] .day{
     background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(148,123,216,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#947bd8',GradientType=0 ); /* IE6-9 */
 }
+section#weather div#forecast_daily .forecast_daily[day="Fri"] .day,
 section#weather div#forecast .forecast[day="Fri"] .time{
     color: rgba(130,229,135,1);
 }
@@ -104,6 +112,7 @@ section#weather div#forecast .forecast[day="Fri"] .day{
     background: linear-gradient(to bottom,  rgba(153,153,153,0) 0%,rgba(130,229,135,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00999999', endColorstr='#82e587',GradientType=0 ); /* IE6-9 */
 }
+section#weather div#forecast_daily .forecast_daily[day="Sat"] .day,
 section#weather div#forecast .forecast[day="Sat"] .time{
     color: rgba(237,135,135,1);
 }
@@ -118,27 +127,12 @@ section#weather div#forecast .forecast[day="Sat"] .day{
 section#weather div#forecast .forecast:first-child{
     border-left: none;
 }
-section#weather div#forecast .forecast [var="temp_max"] {
-    font-size: 2.1em;
-    margin-left: -1em;
-    margin-top: 0.5em;
-    text-shadow: #00000066 0.1em 0.1em 0.1em;
+section#weather div#forecast .forecast div.extra {
+    display: none;
 }
-section#weather div#forecast .forecast [var="temp_min"] {
-    font-size: 1.5em;
-    margin-right: -1em;
-    margin-left: 1em;
-    position: relative;
+section#weather div#forecast .forecast [var="temp"] {
+    font-size: 3em;
     text-shadow: #00000066 0.1em 0.1em 0.1em;
-}
-section#weather div#forecast .forecast [var="temp_min"]::before {
-    content: '/';
-    font-size: 2em;
-    position: absolute;
-    top: -0.5em;
-    left: 0.6em;
-    color: #ffffff33;
-    text-shadow: none;
 }
 section#weather div#forecast .forecast div::after {
     font-size: 0.5em;
@@ -147,7 +141,6 @@ section#weather div#forecast .forecast div::after {
 }
 section#weather div#forecast .forecast .time {
     font-weight: bold;
-    font-size: 1.5em;
 }
 section#weather div#forecast .forecast .humidity,
 section#weather div#forecast .forecast .clouds,
@@ -216,6 +209,7 @@ section#weather div.weather_chart {
         rgba(0,0,0,var(--sunlight_alpha)) 100%);
 }
 section#weather nav {
+    font-size: 0.75em;
     display: inline-block;
     padding: 0.5em;
     background-color: #aaa6;
@@ -226,6 +220,7 @@ section#weather nav.toggle_temperature {
     position: absolute;
     right: 0em;
     top: 0em;
+    display: none;
 }
 section#weather nav a {
     color: #000;
@@ -236,16 +231,26 @@ section#weather nav a {
     margin-right: 0.1em;
     padding-left: 0.2em;
 }
+section#weather nav a::after{
+    content: none !important;
+}
+section#weather nav a[filter="dust"]::before,
 section#weather nav a[filter="temp"]::before,
 section#weather nav a[filter="humidity"]::before,
 section#weather nav a[filter="wind"]::before,
 section#weather nav a[filter="clouds"]::before {
     content: '';
+    font-size: 1em !important;
+    margin: 0em !important;
+    transform: none !important;
     display: inline-block;
     width: 1em;
     height: 1em;
     background-position: center center;
     background-size: contain;
+}
+section#weather nav a[filter="dust"]::before{
+    background-image: url(/plugins/NullWeather/img/web/dust.png);
 }
 section#weather nav a[filter="temp"]::before{
     background-image: url(/plugins/NullWeather/img/web/temperature.png);
@@ -506,7 +511,7 @@ section#weather .graph div.wind[wind_range="13"]{
     top: 0em;
     left: 0em;
     bottom: 0em;
-    width: 50%;
+    /*width: 50%;*/
     z-index: 0;
 }
 .weather_chart .time_bar {
@@ -588,4 +593,64 @@ header {
 }
 .graph.indoors .temp.forecast {
     opacity: 0.1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+daily weather
+*/
+section#weather #forecast_daily{
+    white-space: nowrap;
+}
+section#weather #forecast_daily .forecast_daily {
+    display: inline-block;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 4em;
+    padding: 0.25em;
+    padding-top: 4em;
+    width: 8em;
+    border-right: #000 dashed thin;
+    text-align: center;
+}
+
+section#weather div#forecast_daily .forecast_daily [var="temp_max"] {
+    font-size: 2.1em;
+    margin-left: -1.5em;
+    text-shadow: #00000066 0.1em 0.1em 0.1em;
+}
+section#weather div#forecast_daily .forecast_daily [var="temp_min"] {
+    font-size: 1.5em;
+    margin-top: -0.1em;
+    margin-right: -0.1em;
+    margin-left: 3em;
+    position: relative;
+    text-shadow: #00000066 0.1em 0.1em 0.1em;
+}
+section#weather div#forecast_daily .forecast_daily [var="temp_min"]::before {
+    content: '/';
+    font-size: 1em;
+    position: absolute;
+    top: -0.7em;
+    left: -0.2em;
+    color: #ffffff33;
+    text-shadow: none;
+}
+section#weather div#forecast_daily .forecast_daily .day {
+    font-size: 1.4em;
+}
+#weather_chart [model="indoors_hourly"] {
+    display: none;
 }

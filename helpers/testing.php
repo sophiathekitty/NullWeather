@@ -5,4 +5,7 @@ $OpenWeatherMap = new OpenWeatherMap();
 //$OpenWeatherMap->PullOneCallApi();
 //$OpenWeatherMap->PullLiveAirPollutionData();
 OutputJson($OpenWeatherMap->PullOneCallApi());
+//$model = new WeatherLogs();
+//$fields = $model->DataFields();
+//PullRemoteWeather::GetOneCall();
 ?>

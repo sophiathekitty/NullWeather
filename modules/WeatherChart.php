@@ -2,7 +2,7 @@
 /**
  * weather chart... could probably be updated to use the HourlyChart base class
  */
-class WeatherChart {
+class WeatherChart extends HourlyChart {
 
     private static $chart = null;
     /**
@@ -18,7 +18,14 @@ class WeatherChart {
      */
     public static function Weather(){
         $chart = WeatherChart::GetInstance();
-        $data = $chart->WeatherHourlyAveragesLog();
+        $data = [];
+        $model = new WeatherLogs();
+        for($h = 0; $h < 24; $h++){
+            $data[$h] = $chart->HourlyAverages(WeatherLogs::LoadWeatherHour($h),$h,$model->DataFields());
+        }
+        return $data;
+
+        //$data = $chart->WeatherHourlyAveragesLog();
         // looks like it's flattening the main and description fields weird...
         $fields = ["main","description"];
         foreach($fields as $field){
@@ -39,13 +46,19 @@ class WeatherChart {
      */
     public static function Temp(){
         $chart = WeatherChart::GetInstance();
-        return $chart->WeatherHourlyTempLog();
+        $data = [];
+        for($h = 0; $h < 24; $h++){
+            $data[$h] = $chart->HourlyAverages(WeatherLogs::LoadWeatherHour($h),$h,["temp"]);
+        }
+        return $data;
+        //return $chart->WeatherHourlyTempLog();
     }
     /**
      * calculates the ranges of the weather chart
      * @param array a weather chart array
      * @return array a keyed array of ranges for the chart $ranges['temp']['min']
      */
+    /*
     public static function Ranges($chart){
         $ranges = [
             'temp' => ['min'=>10000,'max'=>0],
@@ -68,12 +81,14 @@ class WeatherChart {
         }
         return $ranges;
     }
+    */
     /**
      * generates a temperature hourly chart... this would get replaced with the HourlyChart base class... 
      * well i'd need to move the for loop to the static function. it's currently kinda redundant having 
      * both functions....
      * @return array returns an array containing an hourly temperature chart
      */
+    /*
     function WeatherHourlyTempLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){
@@ -81,6 +96,7 @@ class WeatherChart {
         }
         return $weatherLog;
     }
+    */
     /**
      * generates a weather hourly chart
      * this would get replaced with the HourlyChart base class... 
@@ -88,6 +104,7 @@ class WeatherChart {
      * both functions....
      * @return array returns an array containing an hourly weather chart
      */
+    /*
     function WeatherHourlyAveragesLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){
@@ -95,11 +112,13 @@ class WeatherChart {
         }
         return $weatherLog;
     }
+    */
     /**
      * calculates the weather average for an hour
      * @param int $hour the hour to search
      * @return array returns an array containing the averages for the hour
      */
+    /*
     function WeatherHourlyAverage($hour){
         $data = WeatherLogs::LoadWeatherHour($hour);
         $averages = [      
@@ -207,12 +226,13 @@ class WeatherChart {
         unset($averages['icons']);
         return $averages;
     }
-    
+    */
     /**
      * calculates the average temperature for an hour
      * @param int $hour the hour to search
      * @return array returns an array containing the averages for the hour
      */
+    /*
     function WeatherHourlyTemp($hour){
         $data = WeatherLogs::LoadWeatherHour($hour);
         if($hour < 10){
@@ -243,5 +263,6 @@ class WeatherChart {
         //$average['temp_max'] = round($average['temp_max']/count($data),2);
         return $average;
     }
+    */
 }
 ?>

@@ -61,6 +61,6 @@ class ForecastPrecipitation extends clsModel {
     }
 }
 if(defined('VALIDATE_TABLES')){
-    clsModel::$models[] = new Forecast();
+    clsModel::$models[] = new ForecastPrecipitation();
 }
 ?>

@@ -6,12 +6,12 @@ class Forecast extends clsModel {
     public $table_name = "Forecast";
     public $fields = [
         [
-            'Field'=>"id",
-            'Type'=>"int(11)",
+            'Field'=>"datetime",
+            'Type'=>"datetime",
             'Null'=>"NO",
             'Key'=>"PRI",
             'Default'=>"",
-            'Extra'=>"auto_increment"
+            'Extra'=>""
         ],[
             'Field'=>"main",
             'Type'=>"varchar(10)",
@@ -96,13 +96,6 @@ class Forecast extends clsModel {
             'Key'=>"",
             'Default'=>"",
             'Extra'=>""
-        ],[
-            'Field'=>"datetime",
-            'Type'=>"datetime",
-            'Null'=>"NO",
-            'Key'=>"",
-            'Default'=>"",
-            'Extra'=>""
         ]
     ];
     private static $forecast = null;
@@ -119,7 +112,7 @@ class Forecast extends clsModel {
      */
     public static function LoadForecast(){
         $forecast = Forecast::GetForecastInstance();
-        return $forecast->LoadAll();
+        return $forecast->LoadAllWhere(null,['datetime'=>'ASC']);
     }
     /**
      * load the next two days of forecast data
@@ -165,7 +158,7 @@ class Forecast extends clsModel {
      */
     public static function Prune(){
         $forecast = Forecast::GetForecastInstance();
-        $forecast->PruneField('datetime',0);
+        $forecast->PruneField('datetime',HoursToSeconds(0));
     }
 }
 if(defined('VALIDATE_TABLES')){

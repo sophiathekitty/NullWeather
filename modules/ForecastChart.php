@@ -2,7 +2,7 @@
 /**
  * tools for generating an hourly chart of forecast data
  */
-class ForecastChart {
+class ForecastChart extends HourlyChart {
     private static $log = null;
     /**
      * @return ForecastChart
@@ -15,9 +15,15 @@ class ForecastChart {
      * calculate the averages for all the forecast data
      * @return array an array containing hourly averages of forecast data
      */
-    public static function Averages(){
+    public static function ForecastAverages(){
         $log = ForecastChart::GetInstance();
-        $data = $log->ForecastHourlyAveragesLog();
+        $data = [];
+        $model = new Forecast();
+        for($h = 0; $h < 24; $h++){
+            $data[$h] = $log->HourlyAverages(Forecast::LoadForecastHour($h),$h,$model->DataFields());
+        }
+        return $data;
+        // i don't think i need to flatten these fields anymore
         $fields = ["main","description"];
         foreach($fields as $field){
             for($i = 0; $i < count($data); $i++){
@@ -35,15 +41,22 @@ class ForecastChart {
      * calculate the averages temperature from forecasts
      * @return array an array containing hourly averages temperature from forecasts
      */
-    public static function Temps(){
+    public static function ForecastTemps(){
         $log = ForecastChart::GetInstance();
-        return $log->ForecastHourlyTempLog();
+        $data = [];
+        $model = new Forecast();
+        for($h = 0; $h < 24; $h++){
+            $data[$h] = $log->HourlyAverages(Forecast::LoadForecastHour($h),$h,["temp"]);
+        }
+        return $data;
     }
+
     /**
      * calculates the temperature ranges for a forecast hourly chart
      * @param array $chart
      * @return array ['temp' => ['min'=>10000,'max'=>0]]
      */
+    /*
     public static function Ranges($chart){
         $ranges = [
             'temp' => ['min'=>10000,'max'=>0]
@@ -54,10 +67,12 @@ class ForecastChart {
         }
         return $ranges;
     }
+    */
     /**
      * calculate the averages temperature from forecasts
      * @return array an array containing hourly averages temperature from forecasts
      */
+    /*
     function ForecastHourlyTempLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){
@@ -65,10 +80,12 @@ class ForecastChart {
         }
         return $weatherLog;
     }
+    */
     /**
      * calculate the averages from forecasts
      * @return array an array containing hourly averages from forecasts
      */
+    /*
     function ForecastHourlyAveragesLog(){
         $weatherLog = [];
         for($h = 0; $h < 24; $h++){
@@ -76,11 +93,13 @@ class ForecastChart {
         }
         return $weatherLog;
     }
+    */
     /**
      * calculate the averages from forecasts
      * @param int $hour the hour to average
      * @return array an array containing hourly averages from forecasts
      */
+    /*
     function ForecastHourlyAverage($hour){
         $data = Forecast::LoadForecastHour($hour);
         if(count($data) == 0){
@@ -96,7 +115,7 @@ class ForecastChart {
                     $data = GetForecastForHour($hour+2);
                     $data = GetForecastForHour($hour+2);
                 }
-            }*/
+            }
         }
         if(count($data) == 0){
             // if next hour is 3, 6, 9, 12, 15, 18, 21
@@ -105,7 +124,7 @@ class ForecastChart {
                 //$data = GetForecastForHour($hour+1);
                 $data = GetForecastForHour($hour-2);
                 $data = GetForecastForHour($hour-2);
-            }*/
+            }
         }
         // if hour is 23
         if(count($data) == 0){
@@ -210,11 +229,13 @@ class ForecastChart {
         unset($averages['icons']);
         return $averages;
     }
+    */
     /**
      * calculate the averages temperature from forecasts
      * @param int $hour the hour to average
      * @return array an array containing hourly averages from forecasts
      */
+    /*
     function ForecastHourlyTemp($hour){
         $data = Forecast::LoadForecastHour($hour);
         if(count($data) == 0){
@@ -245,6 +266,7 @@ class ForecastChart {
         $average['temp_max'] = round($average['temp_max']/count($data),2);
         return $average;
     }
+    */
 }
 
 ?>

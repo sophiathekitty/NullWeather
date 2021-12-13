@@ -1,0 +1,17 @@
+<div class="hour" hour="00" hour_txt="12am">
+    <div class="icon bool" model="weather_hourly" var="icon" icon=""></div>
+    <div class="bar graph">
+        <div class="temp forecast" model="forecast_hourly" var="temp" var_min="temp_min" var_max="temp_max" pallet_name="weather" pallet_color="temp" pallet_lerp="true"></div>
+        <div class="temp weather" model="weather_hourly" var="temp" var_min="temp_min" var_max="temp_max" pallet_name="weather" pallet_color="temp" pallet_lerp="true"></div>
+        <div class="humidity" model="weather_hourly" var="hum" var_min="min_hum" var_max="max_hum" pallet_name="weather" pallet_color="hum" pallet_lerp="true"></div>
+        <div class="wind" model="weather_hourly" var="wind_speed" var_min="min_wind" var_max="max_wind" pallet_name="weather" pallet_color="wind" pallet_lerp="true"></div>
+        <div class="clouds" model="weather_hourly" var="clouds" var_min="min_clouds" var_max="max_clouds"></div>
+        <div class="coarse_dust" model="pollution_hourly" var="pm10" var_min="pm10_min" var_max="pm10_max"></div>
+        <div class="fine_dust" model="pollution_hourly" var="pm2_5" var_min="pm2_5_min" var_max="pm2_5_max"></div>
+    </div>
+    <div class="humidity extra" model="weather_hourly" var="humidity" unit="percent"></div>
+    <div class="temperature" model="weather_hourly" var="temp" unit="fahrenheit"></div>
+    <div class="wind extra" model="weather_hourly" var="wind_speed" unit="MilesPerHour"></div>
+    <div class="clouds extra" model="weather_hourly" var="clouds" unit="percent"></div>
+    <div class="dust extra" model="pollution_hourly" var="dust" unit=""></div>
+</div>

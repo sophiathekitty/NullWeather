@@ -1,6 +1,8 @@
+/*
 section#weather{
-    max-width: 95vw;
+    max-width: 55vw;
 }
+*/
 #weather_chart {
     min-width: 1200px;
 }
@@ -21,7 +23,7 @@ section#weather .weather_chart_holder {
     }
     section#weather nav.filters {
         position: relative;
-        width: 23em;
+        width: 27em;
         white-space: nowrap;
     }
     section#weather .weather_chart_holder {
@@ -33,4 +35,14 @@ section#weather .weather_chart_holder {
         flex-grow: 1;
         height: auto;
     }
+}
+
+[unit="fahrenheit"]{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: bisque;
+}
+section#weather #weather_chart [unit="fahrenheit"]{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: darkgray;
+    text-shadow: 2px 2px black;
 }

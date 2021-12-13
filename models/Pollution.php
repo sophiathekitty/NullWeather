@@ -128,7 +128,9 @@ class Pollution extends clsModel {
         Pollution::Prune();
         $instance = Pollution::GetInstance();
         $pollution = $instance->CleanData($pollution);
+        //$pollution['created'] = date("Y-m-d H:i:s");
         $instance->Save($pollution);
+        Settings::SaveSettingsVar("PollutionModel::Saved",$pollution['created'].date(" H:i:s ").clsDB::$db_g->get_err());
         return Pollution::LoadCurrentPollution();
     }
     /**
@@ -136,7 +138,7 @@ class Pollution extends clsModel {
      */
     public static function Prune(){
         $instance = Pollution::GetInstance();
-        $instance->PruneField('created',Settings::LoadSettingsVar('weather_log_days',5));
+        $instance->PruneField('created',DaysToSeconds(Settings::LoadSettingsVar('weather_log_days',5)));
     }
 }
 if(defined('VALIDATE_TABLES')){

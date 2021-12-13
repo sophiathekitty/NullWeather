@@ -1,10 +1,126 @@
 <html>
     <head>
-        <title>Null Weather</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Null (Weather)</title>
+        <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <meta name="msapplication-TileColor" content="#fafad2">
+        <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#98ed8a">
+        
+        <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+        <link href="/css/landing.css" rel="stylesheet" type="text/css">
+        <link href="/css/units.css" rel="stylesheet" type="text/css">
+        <link href="css/moon.css" rel="stylesheet" type="text/css">
+        <link href="css/forecast.css" rel="stylesheet" type="text/css">
+        <link href="css/weather.css" rel="stylesheet" type="text/css">
+        <link href="css/weather_chart.css" rel="stylesheet" type="text/css">
+        <link href="css/weather_icons.css" rel="stylesheet" type="text/css">
+        <script src="/js/jquery-1.12.1.min.js"></script>
+        <script src="/js/mvc/nullmvc.js.php"></script>
+        <script src="/plugins/NullWeather/js/weather.js.php"></script>
     </head>
     <body>
-        <h1>Weather and Forecasts powered by OpenWeatherMap</h1>
-        <p>you'll need to get an <a href="https://openweathermap.org/">api key</a> to use this. it needs to be added to the <b class="database table">Settings</b> table with the <b class="database field">name</b> <i class="database value">weather_api_key</i></p>
-        <p>i think i have plugins updating automatically now? i hope... testing....</p>
+        <header>
+            <h1 class="null weather">null weather</h1>
+            <nav>
+                <a href="/" target="_top">home</a>
+                <a href="/phpMyAdmin" target="_top">myAdmin</a>
+                <a href="api/" target="_top">api</a>
+                <a href="helpers/" target="_top">helpers</a>
+            </nav>
+            <div id="weather_stamp"></div>
+        </header>
+        <div class="contents">
+            <section id="stamp">
+            </section>
+            <section id="settings" plugin="NullWeather">
+                <h1>plugin settings</h1>
+                <ul>
+                    <li key="weather_api_key">
+                        <span class="key">api key</span>
+                        <span class="value password" var="weather_api_key">-</span>
+                    </li>
+                    <li key="weather_city">
+                        <span class="key">city</span>
+                        <span class="value" var="weather_city">-</span>
+                    </li>
+                    <li key="weather_units">
+                        <span class="key">units</span>
+                        <span class="value" var="weather_units" options="imperial,metric">-</span>
+                    </li>
+                    <li key="weather_pull_delay">
+                        <span class="key">pull delay</span>
+                        <span class="value" var="weather_pull_delay" unit="minutes">-</span>
+                    </li>
+                    <li key="weather_log_days">
+                        <span class="key">log days</span>
+                        <span class="value" var="weather_log_days" unit="days">-</span>
+                    </li>
+                    <li key="weather_archive_weeks">
+                        <span class="key">archive weeks</span>
+                        <span class="value" var="weather_archive_weeks" unit="weeks">-</span>
+                    </li>
+                    <li key="weather_one_call">
+                        <span class="key">one call api</span>
+                        <span class="value bool" var="weather_one_call"></span>
+                    </li>
+                </ul>
+            </section>
+            <section id="stats">
+                <h1>daytime info</h1>
+                <ul>
+                    <li key="sunrise">
+                        <span class="key">sunrise</span>
+                        <span class="value" var="sunrise">-</span>
+                    </li>
+                    <li key="sunset">
+                        <span class="key">sunset</span>
+                        <span class="value" var="sunset">-</span>
+                    </li>
+                    <li key="time_of_day">
+                        <span class="key">time of day</span>
+                        <span class="value" var="time_of_day">-</span>
+                    </li>
+                    <li key="moonrise">
+                        <span class="key">moonrise</span>
+                        <span class="value" var="moonrise">-</span>
+                    </li>
+                    <li key="moonset">
+                        <span class="key">moonset</span>
+                        <span class="value" var="moonset">-</span>
+                    </li>
+                    <li key="moon_phase">
+                        <span class="key">moon phase</span>
+                        <div class="moon" stage="waxing" phase="0.21"><div class="disc" style="transform: rotateY(284.4deg);"></div></div>
+                        <span class="value" var="moon_phase">-</span>
+                    </li>
+                    <li key="moon_out">
+                        <span class="key">moon visible</span>
+                        <span class="value bool" var="moon_out"></span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <footer>
+            <nav>
+                <a href="https://github.com/sophiathekitty/NullWeather#readme" target="_blank">readme</a>
+                <a href="https://github.com/sophiathekitty/NullWeather/issues" target="_blank">issues</a>
+                <a href="https://openweathermap.org/api" target="_blank">OpenWeatherMap</a>
+            </nav>
+        </footer>
     </body>
 </html>

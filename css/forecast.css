@@ -210,7 +210,8 @@ section#weather div.weather_chart {
 }
 section#weather nav {
     font-size: 0.75em;
-    display: inline-block;
+    display: flex;
+    width: max-content;
     padding: 0.5em;
     background-color: #aaa6;
     border-top-right-radius: 0.5em;
@@ -358,6 +359,9 @@ section#weather[focus="forecast"] nav a[focus="forecast"] {
 section#weather[show="wind"] nav.toggle_temperature {
     display: none;
 }
+section#weather[show="dust"] [var="dust"],
+section#weather[show="dust"] .fine_dust,
+section#weather[show="dust"] .coarse_dust,
 section#weather[show="temp"] .temp,
 section#weather[show="temp"] .hour .temperature,
 section#weather[show="humidity"] .humidity,
@@ -613,6 +617,7 @@ daily weather
 */
 section#weather #forecast_daily{
     white-space: nowrap;
+    display: flex;
 }
 section#weather #forecast_daily .forecast_daily {
     display: inline-block;
@@ -624,6 +629,7 @@ section#weather #forecast_daily .forecast_daily {
     width: 8em;
     border-right: #000 dashed thin;
     text-align: center;
+    flex-grow: 1;
 }
 
 section#weather div#forecast_daily .forecast_daily [var="temp_max"] {
@@ -653,4 +659,15 @@ section#weather div#forecast_daily .forecast_daily .day {
 }
 #weather_chart [model="indoors_hourly"] {
     display: none;
+}
+.NullWeather .contents{
+    max-width: none !important;
+    margin-left: 5em;
+    margin-right: 5em;
+}
+@media( max-width:800px){
+    .NullWeather .contents{
+        margin-left: 0em;
+        margin-right: 0em;
+    }
 }

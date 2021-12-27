@@ -215,6 +215,15 @@ class OpenWeatherMap {
             ForecastDaily::SaveForecast($daily);
             $oneCall['daily'][] = $daily;
         }
+        WeatherAlerts::ClearAlerts();
+        if($data->alerts){
+            $oneCall['alerts'] = [];
+            foreach($data->alerts as $alert){
+                $a = $this->OpenWeatherMapApiToNullAlert($alert);
+                WeatherAlerts::SaveAlert($a);
+                $oneCall['alerts'][] = $a;
+            }
+        }
         return $oneCall;
     }
     /**
@@ -390,6 +399,28 @@ class OpenWeatherMap {
             "nh3" => $data->list[0]->components->nh3
                 ];
         return $pollution;
+    }
+    /**
+     * converts the json object of OpenWeatherMap Pollution data into Null Pollution data array
+     * @param object $data the object from the weather api data->list[0]->main->aqi
+     * @return array the associated/keyed data array $pollution['aqi']
+     */
+    private function OpenWeatherMapApiToNullAlert($data){
+        $alert = [
+            "start" => date("Y-m-d H:i:s",$data->start),
+            "end" => date("Y-m-d H:i:s",$data->end),
+            "sender_name" => $data->sender_name,
+            "event" => $data->event,
+            "description" => $data->description,
+            "tags" => ""
+        ];
+        $first = true;
+        foreach($data->tags as $tag){
+            if(!$first) $alert['tags'] .= ",";
+            $alert['tags'] .= $tag;
+            $first = false;
+        }
+        return $alert;
     }
     /**
      * converts the json object of OpenWeatherMap minutely precipitation item into Null Precipitation data array

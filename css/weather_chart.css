@@ -23,7 +23,7 @@ section#weather .weather_chart_holder {
     }
     section#weather nav.filters {
         position: relative;
-        width: 27em;
+        width: max-content;
         white-space: nowrap;
     }
     section#weather .weather_chart_holder {
@@ -45,4 +45,24 @@ section#weather #weather_chart [unit="fahrenheit"]{
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: darkgray;
     text-shadow: 2px 2px black;
+}
+
+section#weather[show="dust"] .fine_dust,
+section#weather[show="dust"] .coarse_dust{
+    position: absolute;
+    left: 0em;
+    right:0em
+}
+section#weather[show="dust"] .fine_dust{
+    background-color: #a7a49c;
+}
+section#weather[show="dust"] .coarse_dust{
+    background-color: #53533f;
+}
+section#weather[show="dust"] [var="dust"]{
+    position: absolute;
+    bottom: 2em;
+    left: 0em;
+    right: 0em;
+    text-align: center;
 }

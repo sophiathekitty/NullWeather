@@ -92,6 +92,7 @@ class WeatherChartView extends HourlyView{
                 if(json.ranges.wind_deg_max > wind_deg_max) wind_deg_max = json.ranges.wind_deg_max;
                 if(json.ranges.wind_deg_min < wind_deg_min) wind_deg_min = json.ranges.wind_deg_min;
             });
+            
             this.mappers["clouds"] = new ReMapper(1,100);
             this.mappers["temp"] = new ReMapper(-10,120);
             this.mappers["feels_like"] = new ReMapper(-10,120);
@@ -99,7 +100,7 @@ class WeatherChartView extends HourlyView{
             this.mappers["pressure"] = new ReMapper(pressure_min,pressure_max);
             this.mappers["wind_deg"] = new ReMapper(wind_deg_min,wind_deg_max);
             this.mappers["wind_speed"] = new ReMapper(0,100);
-            this.mappers["dust"] = new ReMapper(0,100);
+            this.mappers["dust"] = new ReMapper(0,50);
         }
         // weather charts
         if(this.model){
@@ -163,6 +164,8 @@ class WeatherChartView extends HourlyView{
                     $("#weather_chart [hour="+hour.hour+"] .bar.graph [var=pm10]").attr("title","Coarse Dust -- "+hours+am+"\nClouds: "+Math.round(hour.pm10)+" | "+Math.round(hour.pm10_min)+" / "+Math.round(hour.pm10_max));
                     $("#weather_chart [hour="+hour.hour+"] .bar.graph [var=pm10]").css("top",this.mappers.dust.max_mapper(hour.pm10_max)+"%");
                     $("#weather_chart [hour="+hour.hour+"] .bar.graph [var=pm10]").css("bottom",this.mappers.dust.min_mapper(hour.pm10_min)+"%");
+                    
+                    $("#weather_chart [hour="+hour.hour+"] [var=dust]").html(Math.round((hour.pm2_5+hour.pm10)/2));
                 });
             });
         }

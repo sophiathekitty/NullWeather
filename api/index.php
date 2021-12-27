@@ -4,6 +4,6 @@ require_once("../../../includes/main.php");
 //echo " world";
 $settings = new Settings();
 
-$data['apis'] =PluginAPIs("NullWeather/");
+$data = PluginAPIs("NullWeather/");
 OutputJson($data);
 ?>

@@ -129,6 +129,7 @@ class PullRemoteWeather {
             $data['weather']['sunset'] = date("Y-m-d ").date("H:i:s",$data['daytime']['sunset']);
         }
         if(isset($data['weather'])){
+            Settings::SaveSettingsVar("clouds",$data['weather']['clouds']);
             WeatherLogs::LogCurrentWeather($data['weather']);
             return $data['weather'];
         } 

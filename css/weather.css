@@ -424,11 +424,6 @@
     background-image: url(/plugins/NullWeather/img/web/extreme.png);
 }
 
-@media (max-width: 600px) {
-    .weather_stamp {
-        font-size: 1em;
-    }
-}
 
 .weather_stamp .temp_chart.simple {
     display: flex;

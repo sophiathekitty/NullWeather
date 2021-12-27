@@ -7,9 +7,9 @@
  * - DaytimeInfoView
  */
 class WeatherController extends Controller {
-    constructor(){
+    constructor(debug = false){
         console.log("WeatherController::Constructor");
-        super(new WeatherSection());
+        super(new WeatherSection(),debug);
         this.weather = new WeatherView();
         this.settings = new  WeatherSettings();
         this.daytime = new DaytimeInfoView();
@@ -17,14 +17,18 @@ class WeatherController extends Controller {
         //this.view.controller = this;
         this.settings.controller = this;
         //console.log("WeatherController::Constructor",this.settings.controller);
+        this.first_ready = true;
     }
     ready(){
-        console.log("WeatherController::Ready");
-        this.view.build();
-        this.weather.build();
-        this.settings.build();
-        this.daytime.display();
-        this.interval = setTimeout(this.refresh.bind(this),this.view.refresh_rate*View.refresh_ratio);
+        if(this.first_ready){
+            console.log("WeatherController::Ready");
+            this.view.build();
+            this.weather.build();
+            this.settings.build();
+            this.daytime.display();
+            this.interval = setTimeout(this.refresh.bind(this),this.view.refresh_rate*View.refresh_ratio);
+            this.first_ready = false;
+        }
     }
     addSectionEvents(){
         console.log("WeatherController::AddSectionEvents");

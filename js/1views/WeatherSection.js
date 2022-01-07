@@ -21,6 +21,9 @@ class WeatherSection extends View {
         if(this.template){
             this.template.getData(html=>{
                 $(html).appendTo("div.contents");
+                $(html).appendTo(".app main");
+                $("<a href=\"#rooms\" section=\"rooms\">rooms</a>").appendTo("nav.sections");
+                $("<a href=\"#weather\" section=\"weather\">weather</a>").appendTo("nav.sections");
                 this.hourly.build();
                 this.daily.build();
                 this.chart.build();

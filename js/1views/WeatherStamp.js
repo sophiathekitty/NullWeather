@@ -13,7 +13,7 @@ class WeatherView extends View {
             this.template.getData(html=>{
                 // inject the template where it should go?
                 $(html).appendTo("#stamp");
-                $(html).appendTo("header .plugins");
+                $(html).appendTo(".app main");
                 this.display();
             });
         }
@@ -104,7 +104,7 @@ class WeatherView extends View {
                             hours = 12;
                         }
                         $(".weather_stamp .temp_chart [hour="+hour.hour+"]").css("background-color",color);
-                        $(".weather_stamp .temp_chart [hour="+hour.hour+"]").attr("title","Outdoors -- "+hours+am+"\nTemp: "+Math.round(hour.temp)+"° | "+Math.round(hour.temp_min)+"° / "+Math.round(hour.temp_max)+"°\nHum: "+Math.round(hour.humidity)+"% | "+Math.round(hour.humidity_min)+"% / "+Math.round(hour.humidity_max)+"%");
+                        $(".weather_stamp .temp_chart [hour="+hour.hour+"]").attr("title","Outdoors -- "+hours+am+"\nTemp: "+Math.round(hour.temp)+"° | "+Math.round(hour.temp_max)+"° / "+Math.round(hour.temp_min)+"°\nHum: "+Math.round(hour.humidity)+"% | "+Math.round(hour.humidity_max)+"% / "+Math.round(hour.humidity_min)+"%");
                     });
                 });
             });

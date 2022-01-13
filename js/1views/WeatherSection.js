@@ -25,6 +25,7 @@ class WeatherSection extends View {
                 $("<a href=\"#rooms\" section=\"rooms\">rooms</a>").appendTo("nav.sections");
                 $("<a href=\"#weather\" section=\"weather\">weather</a>").appendTo("nav.sections");
                 $(".app main").attr("view","weather");
+                $(".app main").addClass("NullWeather");
                 this.hourly.build();
                 this.daily.build();
                 this.chart.build();

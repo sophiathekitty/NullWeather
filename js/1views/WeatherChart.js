@@ -23,7 +23,7 @@ class WeatherChartView extends HourlyView{
             $("#weather_chart").get(0).style.setProperty("--sunset",this.DateToDayPercent(sunset_date,offset));
             $("#weather_chart").get(0).style.setProperty("--sunset_end",this.DateToDayPercent(sunset_date,offset+2));
         });
-        console.log("WeatherChartView::Display",this.model,this.forecast);
+        if(this.debug) console.log("WeatherChartView::Display",this.model,this.forecast);
         if(this.model && this.forecast){
             this.mappers = {};
             var temp_max = 0;

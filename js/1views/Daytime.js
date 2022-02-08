@@ -9,10 +9,10 @@ class DaytimeInfoView extends View {
         this.display();
     }
     display(){
-        console.log("DaytimeInfoView::display");
+        if(this.debug) console.log("DaytimeInfoView::display");
         if(this.model){
             this.model.getData(json=>{
-                console.log("DaytimeInfoView",json);
+                if(this.debug) console.log("DaytimeInfoView",json);
                 $(".value[var=sunrise]").html(this.nicerTimeString(json.sunrise));
                 $(".value[var=sunset]").html(this.nicerTimeString(json.sunset));
                 $(".value[var=time_of_day]").html(json.time_of_day);

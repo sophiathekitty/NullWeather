@@ -8,7 +8,7 @@
  */
 class WeatherController extends Controller {
     constructor(debug = false){
-        console.log("WeatherController::Constructor");
+        if(debug) console.log("WeatherController::Constructor");
         super(new WeatherSection(),debug);
         this.weather = new WeatherView();
         this.settings = new  WeatherSettings();
@@ -21,7 +21,7 @@ class WeatherController extends Controller {
     }
     ready(){
         if(this.first_ready){
-            console.log("WeatherController::Ready");
+            if(this.debug) console.log("WeatherController::Ready");
             this.view.build();
             this.weather.build();
             this.settings.build();
@@ -31,21 +31,21 @@ class WeatherController extends Controller {
         }
     }
     addSectionEvents(){
-        console.log("WeatherController::AddSectionEvents");
+        if(this.debug) console.log("WeatherController::AddSectionEvents");
         this.click("section#weather .filters a",e=>{
             // click filter options
             e.preventDefault();
-            console.log("WeatherController::FiltersClicked",$(e.currentTarget).attr("filter"));
+            if(this.debug) console.log("WeatherController::FiltersClicked",$(e.currentTarget).attr("filter"));
             $("section#weather").attr("show",$(e.currentTarget).attr("filter"));
         });
     }
     addSettingsEvents(){
-        console.log("WeatherController::AddSettingsEvents");
+        if(this.debug) console.log("WeatherController::AddSettingsEvents");
         this.click("section#settings[plugin=NullWeather] li",e=>{
             e.preventDefault();
             var key = $(e.currentTarget).attr("key");
             var val = $("[plugin=NullWeather] [var="+$(e.currentTarget).attr("key")+"]").attr("val");
-            console.log("WeatherController::SettingsClicked",key,val);
+            if(this.debug) console.log("WeatherController::SettingsClicked",key,val);
             if($(e.currentTarget).hasClass("editing")){
                 // save?
             } else {
@@ -54,36 +54,36 @@ class WeatherController extends Controller {
                     $("[plugin=NullWeather] [var="+key+"] input").focus();
                     $(e.currentTarget).addClass("editing");
                 } else if($("[plugin=NullWeather] [var="+key+"]").hasClass("bool")){
-                    console.log("is a bool");
+                    if(this.debug) console.log("is a bool");
                     var new_val = 1;
                     if(Number(val) == 1) new_val = 0;
                     Settings.saveVar(key,new_val,e=>{
-                        console.log("WeatherController::Settings - Save Complete",key,e);
+                        if(this.debug) console.log("WeatherController::Settings - Save Complete",key,e);
                         //$("[plugin=NullWeather] [var="+key+"]").html(new_val);
                         $("[plugin=NullWeather] [var="+key+"]").attr("val",new_val);
                     },e=>{
-                        console.log("WeatherController::Settings - Save Error",key,e);
+                        if(this.debug) console.log("WeatherController::Settings - Save Error",key,e);
                     },e=>{
-                        console.log("WeatherController::Settings - Save Failed",key,e);
+                        if(this.debug) console.log("WeatherController::Settings - Save Failed",key,e);
                     });
 
                 } else if($("[plugin=NullWeather] [var="+key+"]").attr("options")){
                     var options = $("[plugin=NullWeather] [var="+key+"]").attr("options").split(",");
-                    console.log("has options",options[0]);
+                    if(this.debug) console.log("has options",options[0]);
                     var new_val = options[0];
                     if(val == options[0]) {
                         new_val = options[1];
                     }
                     Settings.saveVar(key,new_val,e=>{
-                        console.log("WeatherController::Settings - Save Complete",key,e);
+                        if(this.debug) console.log("WeatherController::Settings - Save Complete",key,e);
                         $("[plugin=NullWeather] [var="+key+"]").html(new_val);
                         $("[plugin=NullWeather] [var="+key+"]").attr("val",new_val);
                     },e=>{
                         $("[plugin=NullWeather] [var="+key+"]").html("error");
-                        console.log("WeatherController::Settings - Save Error",key,e);
+                        if(this.debug) console.log("WeatherController::Settings - Save Error",key,e);
                     },e=>{
                         $("[plugin=NullWeather] [var="+key+"]").html("failed");
-                        console.log("WeatherController::Settings - Save Failed",key,e);
+                        if(this.debug) console.log("WeatherController::Settings - Save Failed",key,e);
                     });
         
                 } else if(key == "weather_city"){
@@ -103,7 +103,7 @@ class WeatherController extends Controller {
             var key = $(e.currentTarget).attr("name");
             var val = $(e.currentTarget).val();
             var val_old = $("[plugin=NullWeather] [var="+key+"]").attr("val");
-            console.log("WeatherController::SettingsUnfocused",key,val,val_old);
+            if(this.debug) console.log("WeatherController::SettingsUnfocused",key,val,val_old);
             $("[plugin=NullWeather] [key="+key+"]").removeClass("editing");
             Settings.saveVar(key,val,e=>{
                 console.log("WeatherController::Settings - Save Complete",key,e);
@@ -115,10 +115,10 @@ class WeatherController extends Controller {
                 $("[plugin=NullWeather] [var="+key+"]").attr("val",val);
             },e=>{
                 $("[plugin=NullWeather] [var="+key+"]").html("[error]");
-                console.log("WeatherController::Settings - Save Error",key,e);
+                if(this.debug) console.log("WeatherController::Settings - Save Error",key,e);
             },e=>{
                 $("[plugin=NullWeather] [var="+key+"]").html("[failed]");
-                console.log("WeatherController::Settings - Save Failed",key,e);
+                if(this.debug) console.log("WeatherController::Settings - Save Failed",key,e);
             });
         });
     }

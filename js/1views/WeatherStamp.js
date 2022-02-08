@@ -21,7 +21,7 @@ class WeatherView extends View {
     display(){
         if(this.model){
             this.model.getData(json=>{
-                console.log(json);
+                if(this.debug) console.log(json);
                 if(json.weather){
                     // populate weather data
                     $(".weather_stamp").attr("title","Clouds: "+json.weather.clouds+"%\n"+json.weather.main+"\n"+json.weather.description+"\nDust: "+Math.round(json.pollution.pm10)+"\nFine Dust: "+Math.round(json.pollution.pm2_5));

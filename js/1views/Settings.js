@@ -15,7 +15,7 @@ class WeatherSettings extends View {
     display(){
         if(this.model){
             this.model.getData(json=>{
-                console.log(json);
+                if(this.debug) console.log(json);
                 
                 if(json.settings.weather_api_key){
                     if(!$("#settings [key=weather_api_key]").hasClass("editing")){

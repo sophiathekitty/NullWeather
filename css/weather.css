@@ -3,6 +3,7 @@
     border-radius: 1em;
     font-size: 2em;
     color: rgb(245,245,241);
+    max-height: 6em;
 }
 .weather_stamp .forecast {
     position: absolute;

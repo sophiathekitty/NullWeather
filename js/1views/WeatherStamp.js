@@ -5,8 +5,16 @@ class WeatherView extends View {
 
     constructor(){
         super(new WeatherData(),new Template("weather_stamp","/plugins/NullWeather/templates/header/stamp.html"));
+        this.debug = true;
         this.pallet = ColorPallet.getPallet("weather");
         this.chart = new HourlyChart("weather_hourly","weather_log","weather_chart","/plugins/NullWeather/api/weather/logs?hourly=1");
+        try {
+            this.indoor = new TemperaturePixelChart();
+            if(this.debug) console.log("WeatherView::Constructor-IndoorTemperatureHourlyChart",this.indoor);
+        } catch (error) {
+            if(this.debug) console.warn("WeatherView::Constructor-IndoorTemperatureHourlyChart not available",error);
+        }
+
     }
     build(){
         if(this.template){
@@ -14,6 +22,7 @@ class WeatherView extends View {
                 // inject the template where it should go?
                 $(html).appendTo("#stamp");
                 $(html).appendTo(".app main");
+                if(this.indoor) this.indoor.buildWeather();
                 this.display();
             });
         }
@@ -103,11 +112,12 @@ class WeatherView extends View {
                         if(hours == 0){
                             hours = 12;
                         }
-                        $(".weather_stamp .temp_chart [hour="+hour.hour+"]").css("background-color",color);
-                        $(".weather_stamp .temp_chart [hour="+hour.hour+"]").attr("title","Outdoors -- "+hours+am+"\nTemp: "+Math.round(hour.temp)+"° | "+Math.round(hour.temp_max)+"° / "+Math.round(hour.temp_min)+"°\nHum: "+Math.round(hour.humidity)+"% | "+Math.round(hour.humidity_max)+"% / "+Math.round(hour.humidity_min)+"%");
+                        $(".weather_stamp .temp_chart.outdoors [hour="+hour.hour+"]").css("background-color",color);
+                        $(".weather_stamp .temp_chart.outdoors [hour="+hour.hour+"]").attr("title","Outdoors -- "+hours+am+"\nTemp: "+Math.round(hour.temp)+"° | "+Math.round(hour.temp_max)+"° / "+Math.round(hour.temp_min)+"°\nHum: "+Math.round(hour.humidity)+"% | "+Math.round(hour.humidity_max)+"% / "+Math.round(hour.humidity_min)+"%");
                     });
                 });
             });
         }
+        if(this.indoor) this.indoor.refreshWeather();
     }
 }

@@ -10,6 +10,7 @@ class WeatherView extends View {
         this.chart = new HourlyChart("weather_hourly","weather_log","weather_chart","/plugins/NullWeather/api/weather/logs?hourly=1");
         try {
             this.indoor = new TemperaturePixelChart();
+            //this.indoor_temp = new IndoorTemperatureView();
             if(this.debug) console.log("WeatherView::Constructor-IndoorTemperatureHourlyChart",this.indoor);
         } catch (error) {
             if(this.debug) console.warn("WeatherView::Constructor-IndoorTemperatureHourlyChart not available",error);
@@ -23,6 +24,7 @@ class WeatherView extends View {
                 $(html).appendTo("#stamp");
                 $(html).appendTo(".app main");
                 if(this.indoor) this.indoor.buildWeather();
+                if(this.indoor_temp) this.indoor_temp.build();
                 this.display();
             });
         }
@@ -118,6 +120,7 @@ class WeatherView extends View {
                 });
             });
         }
+        if(this.indoor_temp) this.indoor_temp.refresh();
         if(this.indoor) this.indoor.refreshWeather();
     }
 }

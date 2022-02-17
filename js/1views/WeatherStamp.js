@@ -15,6 +15,7 @@ class WeatherView extends View {
         } catch (error) {
             if(this.debug) console.warn("WeatherView::Constructor-IndoorTemperatureHourlyChart not available",error);
         }
+        this.alerts = new WeatherAlertsView();
 
     }
     build(){
@@ -28,6 +29,7 @@ class WeatherView extends View {
                 this.display();
             });
         }
+        if(this.alerts) this.alerts.build();
     }
     display(){
         if(this.model){
@@ -122,5 +124,6 @@ class WeatherView extends View {
         }
         if(this.indoor_temp) this.indoor_temp.refresh();
         if(this.indoor) this.indoor.refreshWeather();
+        if(this.alerts) this.alerts.display();
     }
 }

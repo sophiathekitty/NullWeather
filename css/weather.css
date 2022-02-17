@@ -499,3 +499,21 @@
 .hour .temp[temp_range='13']{
     background-color: #f3281a77;
 }
+
+
+
+
+
+header .alerts .weather_alert {
+    padding: 1em;
+    display: inline-block;
+}
+@media( max-width:600px) {
+    header .alerts .weather_alert {
+        padding: 0em;
+        display: none;
+    }
+    header .alerts div:last-of-type {
+        display: block;
+    }
+}

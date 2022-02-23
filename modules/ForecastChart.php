@@ -20,7 +20,18 @@ class ForecastChart extends HourlyChart {
         $data = [];
         $model = new Forecast();
         for($h = 0; $h < 24; $h++){
-            $data[$h] = $log->HourlyAverages(Forecast::LoadForecastHour($h),$h,$model->DataFields());
+            $fh = Forecast::LoadForecastHour($h);
+            if(count($fh) < 3){
+                $ho = $h-1;
+                if($ho < 0) $ho = 23;
+                $fh1 = Forecast::LoadForecastHour($ho);
+                $fh = array_merge($fh,$fh1);
+                $ho = $h + 1;
+                if($ho > 23) $ho = 0;
+                $fh1 = Forecast::LoadForecastHour($ho);
+                $fh = array_merge($fh,$fh1);                
+            }
+            $data[$h] = $log->HourlyAverages($fh,$h,$model->DataFields());
         }
         return $data;
         // i don't think i need to flatten these fields anymore

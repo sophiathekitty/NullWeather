@@ -10,7 +10,7 @@ class WeatherController extends Controller {
     constructor(debug = false){
         if(debug) console.log("WeatherController::Constructor");
         super(new WeatherSection(),debug);
-        this.weather = new WeatherView();
+        this.weather = new WeatherAlertsView();
         this.settings = new  WeatherSettings();
         this.daytime = new DaytimeInfoView();
         // make sure child views have a reference back to this controller
@@ -23,7 +23,7 @@ class WeatherController extends Controller {
         if(this.first_ready){
             if(this.debug) console.log("WeatherController::Ready");
             this.view.build();
-            this.weather.build();
+            //this.weather.build();
             this.settings.build();
             this.daytime.display();
             this.interval = setTimeout(this.refresh.bind(this),this.view.refresh_rate*View.refresh_ratio);

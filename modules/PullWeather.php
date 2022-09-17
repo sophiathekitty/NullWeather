@@ -21,7 +21,7 @@ class PullRemoteWeather {
      * @return array returns the latest forecast data
      */
     public static function GetLiveForecast(){
-        echo "PullRemoteWeather::GetLiveForecast()\n";
+        Debug::Log("PullRemoteWeather::GetLiveForecast()");
         $weather = PullRemoteWeather::GetInstance();
         return $weather->PullForecast();
     }
@@ -30,7 +30,7 @@ class PullRemoteWeather {
      * @return array returns the latest forecast data
      */
     public static function GetLivePollution(){
-        echo "PullRemoteWeather::GetLivePollution()\n";
+        Debug::Log("PullRemoteWeather::GetLivePollution()");
         $weather = PullRemoteWeather::GetInstance();
         $pollution = $weather->PullPollution();
         print_r($pollution);
@@ -43,7 +43,7 @@ class PullRemoteWeather {
      * @return array returns the latest forecast data
      */
     public static function GetOneCall(){
-        echo "PullRemoteWeather::GetOneCall()\n";
+        Debug::Log("PullRemoteWeather::GetOneCall()");
         $weather = PullRemoteWeather::GetInstance();
         return $weather->PullOneCall();
     }
@@ -59,7 +59,7 @@ class PullRemoteWeather {
      * @return array current weather data
      */
     public function PullWeather(){
-        echo "PullRemoteWeather::PullWeather()\n";
+        Debug::Log("PullRemoteWeather::PullWeather()");
         $weather = null;
         if(Settings::LoadSettingsVar('main')) $weather = $this->openWeatherMap->PullLiveWeatherData();
         if(!is_null($weather)) return $weather;
@@ -70,7 +70,7 @@ class PullRemoteWeather {
      * @return array current forecast data
      */
     public function PullForecast(){
-        echo "PullRemoteWeather->PullForecast()\n";
+        Debug::Log("PullRemoteWeather->PullForecast()");
         $forecast = null;
         if(Settings::LoadSettingsVar('main')) $forecast = $this->openWeatherMap->PullLiveForecastData();
         if(!is_null($forecast)) return $forecast;
@@ -81,7 +81,7 @@ class PullRemoteWeather {
      * @return array current forecast data
      */
     public function PullPollution(){
-        echo "PullRemoteWeather->PullPollution()\n";
+        Debug::Log("PullRemoteWeather->PullPollution()");
         $pollution = null;
         if(Settings::LoadSettingsVar('main')) $pollution = $this->openWeatherMap->PullLiveAirPollutionData();
         if(!is_null($pollution)) return $pollution;
@@ -92,7 +92,7 @@ class PullRemoteWeather {
      * @return array one call api response or null forecast api
      */
     public function PullOneCall(){
-        echo "PullRemoteWeather->PullOneCall()\n";
+        Debug::Log("PullRemoteWeather->PullOneCall()");
         $oneCall = null;
         if(Settings::LoadSettingsVar('main')) $oneCall = $this->openWeatherMap->PullOneCallApi();
         if(!is_null($oneCall)) return $oneCall;
@@ -106,7 +106,7 @@ class PullRemoteWeather {
      * @return array returns the current weather data
      */
     private function PullNullWeatherApi(){
-        echo "PullRemoteWeather->PullNullWeatherApi()\n";
+        Debug::Log("PullRemoteWeather->PullNullWeatherApi()");
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
@@ -119,7 +119,7 @@ class PullRemoteWeather {
         //print_r($data['daytime']);
         if(isset($data['daytime'])){
             // save daytime data
-            echo "save sunrise and sunset data to settings?\n";
+            Debug::Log("save sunrise and sunset data to settings?");
             Settings::SaveSettingsVar("sunrise_time",$data['daytime']['sunrise']);
             Settings::SaveSettingsVar("sunset_time",$data['daytime']['sunset']);
 
@@ -141,7 +141,7 @@ class PullRemoteWeather {
      * @return array returns the current forecast data
      */
     private function PullNullWeatherForecastApi(){
-        echo "PullRemoteWeather->PullNullWeatherForecastApi()\n";
+        Debug::Log("PullRemoteWeather->PullNullWeatherForecastApi()");
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
@@ -149,7 +149,7 @@ class PullRemoteWeather {
             $url = "http://".$hub['url']."/api/weather/?forecast=true";
         else
             $url = "http://".$hub['url']."/plugins/NullWeather/api/forecast/";
-        echo "$url\n";
+        Debug::Log("$url");
         $info = file_get_contents($url);
         $data = json_decode($info,true);
         //print_r($data);
@@ -166,7 +166,7 @@ class PullRemoteWeather {
      * @return array returns the current pollution data
      */
     private function PullNullPollutionApi(){
-        echo "PullRemoteWeather->PullNullPollutionApi()\n";
+        Debug::Log("PullRemoteWeather->PullNullPollutionApi()");
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
@@ -189,7 +189,7 @@ class PullRemoteWeather {
      * @return array returns the current weather and forecast data
      */
     private function PullNullAllInOneApi(){
-        echo "PullRemoteWeather->PullNullAllInOneApi()\n";
+        Debug::Log("PullRemoteWeather->PullNullAllInOneApi()");
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
@@ -203,7 +203,7 @@ class PullRemoteWeather {
         // parse null weather all in one apis....
         if(isset($data['daytime'])){
             // save daytime data
-            echo "save sunrise and sunset data to settings?\n";
+            Debug::Log("save sunrise and sunset data to settings?");
             Settings::SaveSettingsVar("sunrise_time",$data['daytime']['sunrise']);
             Settings::SaveSettingsVar("sunset_time",$data['daytime']['sunset']);
 
@@ -213,11 +213,11 @@ class PullRemoteWeather {
             $data['weather']['sunset'] = date("Y-m-d ").date("H:i:s",$data['daytime']['sunset']);
         }
         if(isset($data['weather'])){
-            echo "save current weather\n";
+            Debug::Log("save current weather");
             WeatherLogs::LogCurrentWeather($data['weather']);
         } 
         if(isset($data['forecast'])){
-            echo "save forecast\n";
+            Debug::Log("save forecast");
             foreach($data['forecast'] as $forecast){
                 Forecast::SaveForecast($forecast);
             }

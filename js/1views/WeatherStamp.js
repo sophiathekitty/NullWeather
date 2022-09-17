@@ -5,11 +5,11 @@ class WeatherView extends View {
 
     constructor(){
         super(new WeatherData(),new Template("weather_stamp","/plugins/NullWeather/templates/header/stamp.html"));
-        this.debug = true;
+        this.debug = false;
         this.pallet = ColorPallet.getPallet("weather");
         this.chart = new HourlyChart("weather_hourly","weather_log","weather_chart","/plugins/NullWeather/api/weather/logs?hourly=1");
         try {
-            this.indoor = new TemperaturePixelChart();
+            //this.indoor = new TemperaturePixelChart();
             //this.indoor_temp = new IndoorTemperatureView();
             if(this.debug) console.log("WeatherView::Constructor-IndoorTemperatureHourlyChart",this.indoor);
         } catch (error) {

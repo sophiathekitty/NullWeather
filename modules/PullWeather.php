@@ -33,8 +33,8 @@ class PullRemoteWeather {
         Debug::Log("PullRemoteWeather::GetLivePollution()");
         $weather = PullRemoteWeather::GetInstance();
         $pollution = $weather->PullPollution();
-        print_r($pollution);
-        Settings::SaveSettingsVar("Services::Weather::Pollution",date("Y-m-d H:i:s"));
+        Debug::Log("PullRemoteWeather::GetLivePollution",$pollution);
+        //Settings::SaveSettingsVar("Services::Weather::Pollution",date("Y-m-d H:i:s"));
         Pollution::SavePollution($pollution);
         return $pollution;
     }

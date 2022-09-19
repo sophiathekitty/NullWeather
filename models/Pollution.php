@@ -130,7 +130,8 @@ class Pollution extends clsModel {
         $pollution = $instance->CleanData($pollution);
         //$pollution['created'] = date("Y-m-d H:i:s");
         $instance->Save($pollution);
-        Settings::SaveSettingsVar("PollutionModel::Saved",$pollution['created'].date(" H:i:s ").clsDB::$db_g->get_err());
+        Services::Log("NullWeather::EveryHour","Pollution::SavePollution ".clsDB::$db_g->get_err());
+        //Settings::SaveSettingsVar("PollutionModel::Saved",$pollution['created'].date(" H:i:s ").clsDB::$db_g->get_err());
         return Pollution::LoadCurrentPollution();
     }
     /**

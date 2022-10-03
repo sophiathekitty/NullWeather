@@ -42,7 +42,7 @@ class ForecastPrecipitation extends clsModel {
      * @param array $forecast the forecast entry data array $forecast['temp]
      */
     public static function SaveForecast($forecast){
-        Forecast::Prune();
+        ForecastPrecipitation::Prune();
         $instance = ForecastPrecipitation::GetForecastInstance();
         $forecast = $instance->CleanData($forecast);
         $row = $instance->LoadWhere(['datetime'=>$forecast['datetime']]);

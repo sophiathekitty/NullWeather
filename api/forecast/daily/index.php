@@ -10,5 +10,6 @@ $data['forecast'] = [
 ];
 //$data['forecast_daily'] = ForecastDaily::LoadForecast();
 $data['forecast_daily'] = ForecastStamp(ForecastDaily::LoadForecast());
+//print_r($data);
 OutputJson($data);
 ?>

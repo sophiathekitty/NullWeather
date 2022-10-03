@@ -161,7 +161,13 @@ function ForecastDay($date){
             $i_count = $value;
         }
     }
-    $averages['description'] = $main;
+    if(is_nan($averages['clouds'])) $averages['clouds'] = 0;
+    if(is_nan($averages['temp'])) $averages['temp'] = 0;
+    if(is_nan($averages['feels_like'])) $averages['feels_like'] = 0;
+    if(is_nan($averages['humidity'])) $averages['humidity'] = 0;
+    if(is_nan($averages['pressure'])) $averages['pressure'] = 0;
+    if(is_nan($averages['wind_deg'])) $averages['wind_deg'] = 0;
+    if(is_nan($averages['wind_speed'])) $averages['wind_speed'] = 0;
 
     return $averages;
 }

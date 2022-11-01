@@ -9,7 +9,8 @@ class WeatherSection extends View {
      * and adds hourly, daily, and weather chart views
      */
     constructor(){
-        super(null,new Template("weather_section","/plugins/NullWeather/templates/sections/weather.html"));
+        super(null,new Template("weather_section","/plugins/NullWeather/widgets/weather_section.php"));
+        //super(null,new Template("weather_section","/plugins/NullWeather/templates/sections/weather.html"));
         this.hourly = new ForecastView();
         this.daily = new ForecastDailyView();
         this.chart = new WeatherChartView();
@@ -26,9 +27,9 @@ class WeatherSection extends View {
                 $("<a href=\"#weather\" section=\"weather\">weather</a>").appendTo("nav.sections");
                 if(screen.width > 800) $(".app main").attr("view","weather");
                 $(".app main").addClass("NullWeather");
-                this.hourly.build();
-                this.daily.build();
-                this.chart.build();
+                //this.hourly.build();
+                //this.daily.build();
+                //this.chart.build();
                 if(this.controller){
                     this.controller.addSectionEvents();
                 }

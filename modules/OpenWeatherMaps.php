@@ -166,6 +166,7 @@ class OpenWeatherMap {
         $api_key = Settings::LoadSettingsVar('weather_api_key');
         if(is_null($api_key)) return null;
         if(!$this->CanPullOneCallApi()) return null;
+        Services::Start("OpenWeatherMap::OneCall");
         $lat = Settings::LoadSettingsVar("weather_lat");
         $lon = Settings::LoadSettingsVar("weather_lon");
         if(is_null($lat) || is_null($lon)){
@@ -189,6 +190,7 @@ class OpenWeatherMap {
         Settings::SaveSettingsVar("sunrise_txt",date("H:i",strtotime($oneCall['current']['sunrise'])));
         Settings::SaveSettingsVar("sunset_txt",date("H:i",strtotime($oneCall['current']['sunset'])));
 
+        Sunrise::SaveCurrentSunrise($oneCall['current']['sunrise'],$oneCall['current']['sunset']);
         $oneCall['minutely'] = [];
         foreach($data->minutely as $m){
             $precipitation = $this->OpenWeatherMapApiToNullPrecipitation($m);
@@ -201,6 +203,8 @@ class OpenWeatherMap {
             Forecast::SaveForecast($forecast);
             $oneCall['hourly'][] = $forecast;
         }
+        
+        Services::Log("OpenWeatherMap::OneCall","Daily ".count($data->daily)." ".date("Y-m-d",$data->daily[0]->dt));
         $oneCall['daily'] = [];
         Settings::SaveSettingsVar("moonrise_time",$data->daily[0]->moonrise);
         Settings::SaveSettingsVar("moonset_time",$data->daily[0]->moonset);
@@ -209,14 +213,20 @@ class OpenWeatherMap {
         Settings::SaveSettingsVar("moonset_txt",date("H:i",$data->daily[0]->moonset));
 
         Settings::SaveSettingsVar("moon_phase",$data->daily[0]->moon_phase);    
-        
+
         foreach($data->daily as $d){
             $daily = $this->OpenWeatherMapDailyForecastToNullForecast($d);
+            Services::Log("OpenWeatherMap::OneCall","Daily ".date("Y-m-d D",$d->dt)." ".$d->moon_phase);
+            
+            //Sunrise::SaveSunriseDay(date("Y-m-d",$d->dt),$d->sunrise,$d->sunset);
+            Sunrise::SaveMoonrise(date("Y-m-d",$d->dt),$d->moonrise,$d->moonset,$d->moon_phase);
+            
             ForecastDaily::SaveForecast($daily);
             $oneCall['daily'][] = $daily;
         }
         WeatherAlerts::ClearAlerts();
         if($data->alerts){
+            Services::Log("OpenWeatherMap::OneCall","Alerts ".count($data->alerts));
             $oneCall['alerts'] = [];
             foreach($data->alerts as $alert){
                 $a = $this->OpenWeatherMapApiToNullAlert($alert);
@@ -224,6 +234,7 @@ class OpenWeatherMap {
                 $oneCall['alerts'][] = $a;
             }
         }
+        Services::Complete("OpenWeatherMap::OneCall");
         return $oneCall;
     }
     /**

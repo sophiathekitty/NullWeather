@@ -120,11 +120,13 @@ class PullRemoteWeather {
         if(isset($data['daytime'])){
             // save daytime data
             Debug::Log("save sunrise and sunset data to settings?");
+            /*
             Settings::SaveSettingsVar("sunrise_time",$data['daytime']['sunrise']);
             Settings::SaveSettingsVar("sunset_time",$data['daytime']['sunset']);
 
             Settings::SaveSettingsVar("sunrise_txt",date("H:i",$data['daytime']['sunrise']));
             Settings::SaveSettingsVar("sunset_txt",date("H:i",$data['daytime']['sunset']));
+            */
             $data['weather']['sunrise'] = date("Y-m-d ").date("H:i:s",$data['daytime']['sunrise']);
             $data['weather']['sunset'] = date("Y-m-d ").date("H:i:s",$data['daytime']['sunset']);
 

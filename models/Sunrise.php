@@ -201,6 +201,19 @@ class Sunrise extends clsModel {
         $Sunrise = $instance->CleanData($Sunrise);
         if($Sunrise['date'] == date("Y-m-d")){
             // cache today's data to the settings table for stuff that might use that
+            if(isset($Sunrise["sunrise_time"])){
+                Settings::SaveSettingsVar("sunrise_time",$Sunrise["sunrise_time"]);
+                Settings::SaveSettingsVar("sunset_time",$Sunrise["sunset_time"]);
+                Settings::SaveSettingsVar("sunrise_txt",date("H:i",$Sunrise["sunrise_time"]));
+                Settings::SaveSettingsVar("sunset_txt",date("H:i",$Sunrise["sunset_time"]));        
+            }
+            if(isset($Sunrise["moonrise_time"])){
+                Settings::SaveSettingsVar("moonrise_time",$Sunrise["moonrise_time"]);
+                Settings::SaveSettingsVar("moonset_time",$Sunrise["moonset_time"]);
+                Settings::SaveSettingsVar("moonrise_txt",date("H:i",$Sunrise["moonrise_time"]));
+                Settings::SaveSettingsVar("moonset_txt",date("H:i",$Sunrise["moonset_time"]));
+                Settings::SaveSettingsVar("moon_phase",$Sunrise["moon_phase"]);
+            }    
         }
         $row = $instance->LoadWhere(['date'=>$Sunrise['date']]);
         if(is_null($row)){

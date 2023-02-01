@@ -178,14 +178,14 @@ section#weather div.weather_chart {
     --sunset_end: 75%;
 
     background: linear-gradient(90deg,
-        rgba(0, 0, 66,var(--sunlight_alpha)) 0%, 
-        rgba(0, 0, 66,var(--sunlight_alpha)) var(--sunrise_start), 
+        rgba(0, 0, 0,var(--sunlight_alpha)) 0%, 
+        rgba(0, 0, 0,var(--sunlight_alpha)) var(--sunrise_start), 
         rgba(177, 33, 148, var(--sunlight_alpha)) var(--sunrise), 
-        rgba(0, 166, 255, var(--sunlight_alpha)) var(--sunrise_end),
-        rgba(0, 166, 255, var(--sunlight_alpha)) var(--sunset_start),
+        rgba(150, 150, 150, var(--sunlight_alpha)) var(--sunrise_end),
+        rgba(150, 150, 150, var(--sunlight_alpha)) var(--sunset_start),
         rgba(192, 52, 17, var(--sunlight_alpha)) var(--sunset),
-        rgba(0,0,66,var(--sunlight_alpha)) var(--sunset_end),
-        rgba(0,0,66,var(--sunlight_alpha)) 100%);
+        rgba(0,0,0,var(--sunlight_alpha)) var(--sunset_end),
+        rgba(0,0,0,var(--sunlight_alpha)) 100%);
 }
 .light_chart {
     --sunlight_alpha:0.25;
@@ -390,33 +390,51 @@ section#weather div.forecast_holder::-webkit-scrollbar {
 }
 
 section#weather[focus="indoors"] .temp.indoors{
-    opacity: 0.95;
+    opacity: 1;
+    border-top: #f2d8ba66 thin solid;
+    border-bottom: #f2d8ba66 thin solid;
 }
 section#weather[focus="indoors"] .temp.weather{
     opacity: 0.25;
+    border-top: #cccccc33 thin solid;
+    border-bottom: #cccccc33 thin solid;
 }
 section#weather[focus="indoors"] .temp.forecast{
     opacity: 0.01;
+    border-top: #cccccc33 thin solid;
+    border-bottom: #cccccc33 thin solid;
 }
 
 section#weather[focus="outdoors"] .temp.indoors{
-    opacity: 0.01;
+    opacity: 0.25;
+    border-top: #e7b86d33 thin solid;
+    border-bottom: #e7b86d33 thin solid;
 }
 section#weather[focus="outdoors"] .temp.weather{
     opacity: 1;
+    border-top: #eeeeee66 thin solid;
+    border-bottom: #eeeeee66 thin solid;
 }
 section#weather[focus="outdoors"] .temp.forecast{
-    opacity: 0.35;
+    opacity: 0.85;
+    border-top: #cccccc33 thin solid;
+    border-bottom: #cccccc33 thin solid;
 }
 
 section#weather[focus="forecast"] .temp.indoors{
     opacity: 0.01;
+    border-top: #e7b86d33 thin solid;
+    border-bottom: #e7b86d33 thin solid;
 }
 section#weather[focus="forecast"] .temp.weather{
     opacity: 0.25;
+    border-top: #cccccc33 thin solid;
+    border-bottom: #cccccc33 thin solid;
 }
 section#weather[focus="forecast"] .temp.forecast{
-    opacity: 0.95;
+    opacity: 1;
+    border-top: #eeeeee66 thin solid;
+    border-bottom: #eeeeee66 thin solid;
 }
 
 

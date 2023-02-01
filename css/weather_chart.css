@@ -10,9 +10,9 @@ section#weather .weather_chart_holder {
     overflow-x: auto;
     padding-bottom: 0px;
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2c539e+0,2c539e+100&1+0,0+100;Blue+3D+%232 */
-    background: -moz-linear-gradient(top,  rgba(44,83,158,1) 0%, rgba(44,83,158,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  rgba(44,83,158,1) 0%,rgba(44,83,158,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  rgba(44,83,158,1) 0%,rgba(44,83,158,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top,  rgb(83, 109, 157,0.5) 0%, rgba(44,83,158,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgb(83, 109, 157,0.5) 0%,rgba(44,83,158,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgb(83, 109, 157,0.5) 0%,rgba(44,83,158,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#002c539e',GradientType=0 ); /* IE6-9 */
 }
 

@@ -184,12 +184,13 @@ class OpenWeatherMap {
         $oneCall['current'] = $this->OpenWeatherMapApiToNullWeather($data);
         WeatherLogs::LogCurrentWeather($oneCall['current']);
         // set sunrise and sunset SettingsVar
+        /*
         Settings::SaveSettingsVar("sunrise_time",strtotime($oneCall['current']['sunrise']));
         Settings::SaveSettingsVar("sunset_time",strtotime($oneCall['current']['sunset']));
 
         Settings::SaveSettingsVar("sunrise_txt",date("H:i",strtotime($oneCall['current']['sunrise'])));
         Settings::SaveSettingsVar("sunset_txt",date("H:i",strtotime($oneCall['current']['sunset'])));
-
+        */
         Sunrise::SaveCurrentSunrise($oneCall['current']['sunrise'],$oneCall['current']['sunset']);
         $oneCall['minutely'] = [];
         foreach($data->minutely as $m){
@@ -206,6 +207,7 @@ class OpenWeatherMap {
         
         Services::Log("OpenWeatherMap::OneCall","Daily ".count($data->daily)." ".date("Y-m-d",$data->daily[0]->dt));
         $oneCall['daily'] = [];
+        /*
         Settings::SaveSettingsVar("moonrise_time",$data->daily[0]->moonrise);
         Settings::SaveSettingsVar("moonset_time",$data->daily[0]->moonset);
 
@@ -213,7 +215,7 @@ class OpenWeatherMap {
         Settings::SaveSettingsVar("moonset_txt",date("H:i",$data->daily[0]->moonset));
 
         Settings::SaveSettingsVar("moon_phase",$data->daily[0]->moon_phase);    
-
+        */
         foreach($data->daily as $d){
             $daily = $this->OpenWeatherMapDailyForecastToNullForecast($d);
             Services::Log("OpenWeatherMap::OneCall","Daily ".date("Y-m-d D",$d->dt)." ".$d->moon_phase);

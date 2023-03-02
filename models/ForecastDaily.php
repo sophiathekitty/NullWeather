@@ -243,7 +243,7 @@ class ForecastDaily extends clsModel {
      */
     public static function Prune(){
         $forecast = ForecastDaily::GetForecastInstance();
-        $forecast->PruneField('datetime',DaysToSeconds(0));
+        $forecast->PruneField('datetime',HoursToSeconds(12));
     }
 }
 if(defined('VALIDATE_TABLES')){

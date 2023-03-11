@@ -48,7 +48,8 @@ section#weather div#forecast .forecast .day{
 }
 section#weather div#forecast_daily .forecast_daily[day="Sun"] .day,
 section#weather div#forecast .forecast[day="Sun"] .time{
-    color: rgba(108,169,201,1);
+    /*color: rgba(108,169,201,1);*/
+    color: var(--sun);
 }
 section#weather div#forecast .forecast[day="Sun"] .day{
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,6ca9c9+100&0+50,1+100 */
@@ -59,7 +60,8 @@ section#weather div#forecast .forecast[day="Sun"] .day{
 }
 section#weather div#forecast_daily .forecast_daily[day="Mon"] .day,
 section#weather div#forecast .forecast[day="Mon"] .time{
-    color: rgba(106,196,106,1);
+    /*color: rgba(106,196,106,1);*/
+    color: var(--mon);
 }
 section#weather div#forecast .forecast[day="Mon"] .day{
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,6ac46a+100&0+50,1+100 */
@@ -70,7 +72,8 @@ section#weather div#forecast .forecast[day="Mon"] .day{
 }
 section#weather div#forecast_daily .forecast_daily[day="Tue"] .day,
 section#weather div#forecast .forecast[day="Tue"] .time{
-    color: rgba(209,193,115,1);
+    /*color: rgba(209,193,115,1);*/
+    color: var(--tue);
 }
 section#weather div#forecast .forecast[day="Tue"] .day {
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,d1c173+100&0+50,1+100 */
@@ -81,7 +84,8 @@ section#weather div#forecast .forecast[day="Tue"] .day {
 }
 section#weather div#forecast_daily .forecast_daily[day="Wed"] .day,
 section#weather div#forecast .forecast[day="Wed"] .time{
-    color: rgba(216,121,177,1);
+    /*color: rgba(216,121,177,1);*/
+    color: var(--wed);
 }
 section#weather div#forecast .forecast[day="Wed"] .day{
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,d879b1+100&0+50,1+100 */
@@ -92,7 +96,8 @@ section#weather div#forecast .forecast[day="Wed"] .day{
 }
 section#weather div#forecast_daily .forecast_daily[day="Thu"] .day,
 section#weather div#forecast .forecast[day="Thu"] .time{
-    color: rgba(148,123,216,1);
+    /*color: rgba(148,123,216,1);*/
+    color: var(--thu);
 }
 section#weather div#forecast .forecast[day="Thu"] .day{
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,947bd8+100&0+50,1+100 */
@@ -103,7 +108,8 @@ section#weather div#forecast .forecast[day="Thu"] .day{
 }
 section#weather div#forecast_daily .forecast_daily[day="Fri"] .day,
 section#weather div#forecast .forecast[day="Fri"] .time{
-    color: rgba(130,229,135,1);
+    /*color: rgba(130,229,135,1);*/
+    color: var(--fri);
 }
 section#weather div#forecast .forecast[day="Fri"] .day{
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,82e587+100&0+50,1+100 */
@@ -114,7 +120,8 @@ section#weather div#forecast .forecast[day="Fri"] .day{
 }
 section#weather div#forecast_daily .forecast_daily[day="Sat"] .day,
 section#weather div#forecast .forecast[day="Sat"] .time{
-    color: rgba(237,135,135,1);
+    /*color: rgba(237,135,135,1);*/
+    color: var(--sat);
 }
 section#weather div#forecast .forecast[day="Sat"] .day{
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#999999+0,ed8787+100&0+50,1+100 */

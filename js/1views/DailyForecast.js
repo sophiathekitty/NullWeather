@@ -53,8 +53,10 @@ class ForecastDailyView extends View {
                                 // time
                                 $("[collection=forecast_daily] [index="+index+"] [var=day]").html(item.day);
                                 this.calendar_pallet.getColor(item.day,color=>{
+                                    //console.log("DailyForecast::Display::day_color",item.day,color);
                                     $("[collection=forecast_daily] [index="+index+"] [var=day]").css("color",color);
                                 });
+                                //console.log(this.calendar_pallet);
                             });    
                         } else {
                             if(this.debug) console.error("DailyForecastView::display--json.daily_forecast missing",json);

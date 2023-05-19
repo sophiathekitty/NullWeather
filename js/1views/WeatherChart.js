@@ -10,19 +10,24 @@ class WeatherChartView extends HourlyView{
     }
     display(){
         // do sunrise stuff
+        /*
         var offset = 0;
-        Settings.loadVar('sunrise_time',sunrise_time=>{
-            var sunrise_date = new Date(sunrise_time*1000);
-            $("#weather_chart").get(0).style.setProperty("--sunrise_start",this.DateToDayPercent(sunrise_date,offset-2));
-            $("#weather_chart").get(0).style.setProperty("--sunrise",this.DateToDayPercent(sunrise_date,offset));
-            $("#weather_chart").get(0).style.setProperty("--sunrise_end",this.DateToDayPercent(sunrise_date,offset+2));
+        Settings.loadVar('sunrise_txt',sunrise_date=>{
+            var sunset_date = sunrise_date;
+            console.log("WeatherChartView::Display::SunriseTime",sunset_date,sunset_date,offset,this.TimeToDayPercent(sunset_date,offset-2),this.TimeToDayPercent(sunset_date,offset),this.TimeToDayPercent(sunset_date,offset+2));
+            //var sunrise_date = new Date(sunrise_time*1000);
+            $("#weather_chart").get(0).style.setProperty("--sunrise_start",this.TimeToDayPercent(sunrise_date,offset-2));
+            $("#weather_chart").get(0).style.setProperty("--sunrise",this.TimeToDayPercent(sunrise_date,offset));
+            $("#weather_chart").get(0).style.setProperty("--sunrise_end",this.TimeToDayPercent(sunrise_date,offset+2));
         });
-        Settings.loadVar('sunset_time',sunset_time=>{
-            var sunset_date = new Date(sunset_time*1000);
-            $("#weather_chart").get(0).style.setProperty("--sunset_start",this.DateToDayPercent(sunset_date,offset-2));
-            $("#weather_chart").get(0).style.setProperty("--sunset",this.DateToDayPercent(sunset_date,offset));
-            $("#weather_chart").get(0).style.setProperty("--sunset_end",this.DateToDayPercent(sunset_date,offset+2));
+        Settings.loadVar('sunset_txt',sunset_date=>{
+            //var sunset_date = new Date(sunset_time*1000);
+            console.log("WeatherChartView::Display::SunsetTime",sunset_date,sunset_date,offset,this.TimeToDayPercent(sunset_date,offset-2),this.TimeToDayPercent(sunset_date,offset),this.TimeToDayPercent(sunset_date,offset+2));
+            $("#weather_chart").get(0).style.setProperty("--sunset_start",this.TimeToDayPercent(sunset_date,offset-2));
+            $("#weather_chart").get(0).style.setProperty("--sunset",this.TimeToDayPercent(sunset_date,offset));
+            $("#weather_chart").get(0).style.setProperty("--sunset_end",this.TimeToDayPercent(sunset_date,offset+2));
         });
+        */
         if(this.debug) console.log("WeatherChartView::Display",this.model,this.forecast);
         if(this.model && this.forecast){
             this.mappers = {};

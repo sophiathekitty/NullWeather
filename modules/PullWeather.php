@@ -4,6 +4,9 @@
  */
 class PullRemoteWeather {
     private static $weather = null;
+    /**
+     * @return PullRemoteWeather
+     */
     private static function GetInstance(){
         if(is_null(PullRemoteWeather::$weather)) PullRemoteWeather::$weather = new PullRemoteWeather();
         return PullRemoteWeather::$weather;
@@ -60,9 +63,12 @@ class PullRemoteWeather {
      */
     public function PullWeather(){
         Debug::Log("PullRemoteWeather::PullWeather()");
+        Services::Log("NullWeather::EveryMinute","PullRemoteWeather::PullWeather");
         $weather = null;
-        if(Settings::LoadSettingsVar('main')) $weather = $this->openWeatherMap->PullLiveWeatherData();
-        if(!is_null($weather)) return $weather;
+        if(Servers::IsMain()) $weather = $this->openWeatherMap->PullLiveWeatherData();
+        if(!is_null($weather)) {
+            return $weather;
+        }
         return $this->PullNullWeatherApi();
     }
     /**
@@ -72,7 +78,7 @@ class PullRemoteWeather {
     public function PullForecast(){
         Debug::Log("PullRemoteWeather->PullForecast()");
         $forecast = null;
-        if(Settings::LoadSettingsVar('main')) $forecast = $this->openWeatherMap->PullLiveForecastData();
+        if(Servers::IsMain()) $forecast = $this->openWeatherMap->PullLiveForecastData();
         if(!is_null($forecast)) return $forecast;
         return $this->PullNullWeatherForecastApi();
     }
@@ -83,7 +89,7 @@ class PullRemoteWeather {
     public function PullPollution(){
         Debug::Log("PullRemoteWeather->PullPollution()");
         $pollution = null;
-        if(Settings::LoadSettingsVar('main')) $pollution = $this->openWeatherMap->PullLiveAirPollutionData();
+        if(Servers::IsMain()) $pollution = $this->openWeatherMap->PullLiveAirPollutionData();
         if(!is_null($pollution)) return $pollution;
         return $this->PullNullPollutionApi();
     }
@@ -94,7 +100,7 @@ class PullRemoteWeather {
     public function PullOneCall(){
         Debug::Log("PullRemoteWeather->PullOneCall()");
         $oneCall = null;
-        if(Settings::LoadSettingsVar('main')) $oneCall = $this->openWeatherMap->PullOneCallApi();
+        if(Servers::IsMain()) $oneCall = $this->openWeatherMap->PullOneCallApi();
         if(!is_null($oneCall)) return $oneCall;
         return $this->PullNullAllInOneApi();
     }
@@ -107,6 +113,7 @@ class PullRemoteWeather {
      */
     private function PullNullWeatherApi(){
         Debug::Log("PullRemoteWeather->PullNullWeatherApi()");
+        Services::Log("NullWeather::EveryMinute","PullRemoteWeather::PullNullWeatherApi");
         $hub = Servers::GetHub();
         //print_r($hub);
         if(is_null($hub)) return null;
@@ -129,15 +136,18 @@ class PullRemoteWeather {
             */
             $data['weather']['sunrise'] = date("Y-m-d ").date("H:i:s",$data['daytime']['sunrise']);
             $data['weather']['sunset'] = date("Y-m-d ").date("H:i:s",$data['daytime']['sunset']);
+            Services::Log("NullWeather::EveryMinute","PullRemoteWeather::PullNullWeatherApi ".$data['weather']['sunrise'].", ".$data['weather']['sunset']);
 
             Sunrise::SaveCurrentSunrise($data['daytime']['sunrise'],$data['daytime']['sunset']);
         }
         if(isset($data['weather'])){
             Settings::SaveSettingsVar("clouds",$data['weather']['clouds']);
-            WeatherLogs::LogCurrentWeather($data['weather']);
+            $save = WeatherLogs::LogCurrentWeather($data['weather']);
+            if(!is_null($save) && isset($save['error']) && $save['error'] != "") Services::Error("NullWeather::EveryMinute","PullRemoteWeather::PullNullWeatherApi -- ".$save['error']);
+            else Services::Log("NullWeather::EveryMinute","PullRemoteWeather::PullNullWeatherApi t: ".$data['weather']['temp'].", h: ".$data['weather']['humidity']);
             return $data['weather'];
         } 
-        
+        Services::Warn("NullWeather::EveryMinute","PullRemoteWeather::PullNullWeatherApi -- no weather data");
         return null;
     }
     /**
@@ -228,7 +238,6 @@ class PullRemoteWeather {
         } 
         return $data;
     }
-
 }
 
 ?>

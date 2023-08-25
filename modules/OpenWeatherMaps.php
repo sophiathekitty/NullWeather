@@ -8,14 +8,17 @@ class OpenWeatherMap {
      * @return array|null returns an array of current weather or null
      */
     public function PullLiveWeatherData(){
-        echo "OpenWeatherMap::PullLiveWeatherData()\n";
+        //echo "OpenWeatherMap::PullLiveWeatherData()\n";
         // am i the main hub? or should i pull from the main hub?
-        $main = Settings::LoadSettingsVar("main");
+        $main = Servers::IsMain();
         $hub = Servers::GetHub();
         // grab live data from open weather map if i'm main or i there's no hub
         if($main || is_null($hub)){
             $weather = $this->PullOpenWeatherMapWeatherApi();
             if(is_null($weather)) return null;
+            Services::Log("NullWeather::EveryMinute","PullRemoteWeather::PullLiveWeatherData: ".$weather['main']);
+            if(isset($weather['sunrise_time'],$weather['sunset_time'])) Sunrise::SaveCurrentSunrise($weather['sunrise_time'],$weather['sunset_time']);
+            Settings::SaveSettingsVar("clouds",$weather['clouds']);
             WeatherLogs::LogCurrentWeather($weather);
             return $weather;
         }
@@ -27,7 +30,7 @@ class OpenWeatherMap {
      */
     public function PullLiveForecastData(){
         // am i the main hub? or should i pull from the main hub?
-        $main = Settings::LoadSettingsVar("main");
+        $main = Servers::IsMain();
         $hub = Servers::GetHub();
         if($main || is_null($hub)){
             $forecast = $this->PullOpenWeatherMapForecastApi();
@@ -50,9 +53,10 @@ class OpenWeatherMap {
      */
     public function PullLiveAirPollutionData(){
         // 
-        echo "OpenWeatherMap::PullLiveAirPollutionData()\n";
+        //echo "OpenWeatherMap::PullLiveAirPollutionData()\n";
         $pollution = $this->PullOpenWeatherMapAirPollutionApi();
-        print_r($pollution);
+        //print_r($pollution);
+        return $pollution;
     }
     /**
      * can actually call the api
@@ -61,7 +65,7 @@ class OpenWeatherMap {
     public function CanCallApi(){
         $api_key = Settings::LoadSettingsVar('weather_api_key');
         if(is_null($api_key)) return false;
-        $main = Settings::LoadSettingsVar("main");
+        $main = Servers::IsMain();
         $hub = Servers::GetHub();
         return ($main || is_null($hub));
     }
@@ -91,14 +95,20 @@ class OpenWeatherMap {
         $api_key = Settings::LoadSettingsVar('weather_api_key');
         if(is_null($api_key)) return null;
         if(!$this->CanPullWeatherApi()) return null;
+        Services::Start("OpenWeatherMap::PullOpenWeatherMapWeatherApi");
         $city = Settings::LoadSettingsVar('weather_city',"Westminster,US");
         $units = Settings::LoadSettingsVar('weather_units',"imperial");
         $url = "http://api.openweathermap.org/data/2.5/weather?q=$city&units=$units&appid=$api_key";
         $info = file_get_contents($url);
         $data = json_decode($info);
         // grab sunrise data
-        print_r($data);
-    return $this->OpenWeatherMapApiToNullWeather($data);
+        //print_r($data);
+        Services::Log("OpenWeatherMap::PullOpenWeatherMapWeatherApi","Data:".$data->weather[0]->main);
+        $null_data = $this->OpenWeatherMapWeatherApiToNullWeather($data);
+        Services::Log("OpenWeatherMap::PullOpenWeatherMapWeatherApi","url: ".$url);
+        Services::Log("OpenWeatherMap::PullOpenWeatherMapWeatherApi","Data:".$null_data['main']);
+        Services::Complete("OpenWeatherMap::PullOpenWeatherMapWeatherApi");
+        return $null_data;
     }
     /**
      * pulls the 5 Day / 3 Hour Forecast api: https://openweathermap.org/forecast5
@@ -107,17 +117,21 @@ class OpenWeatherMap {
     private function PullOpenWeatherMapForecastApi(){
         $api_key = Settings::LoadSettingsVar('weather_api_key');
         if(is_null($api_key)) return null;
+        Services::Start("OpenWeatherMap::PullOpenWeatherMapForecastApi");
         $city = Settings::LoadSettingsVar('weather_city',"Denver,CO,US");
         $units = Settings::LoadSettingsVar('weather_units',"imperial");
         $url = "http://api.openweathermap.org/data/2.5/forecast?q=$city&units=$units&appid=$api_key";
         $info = file_get_contents($url);
         $data = json_decode($info);
         $forecast = [];
+        Services::Log("OpenWeatherMap::PullOpenWeatherMapForecastApi","url:".$url);
         foreach($data->list as $d){
             $f = $this->OpenWeatherMapForecastToNullForecast($d);
             $forecast[] = $f;
+            Services::Log("OpenWeatherMap::PullOpenWeatherMapForecastApi","Forecast: ".$f['datetime']." - ".$f['main']);
             Forecast::SaveForecast($f);
         }
+        Services::Complete("OpenWeatherMap::PullOpenWeatherMapForecastApi");
         return $forecast;
     }
     /**
@@ -137,7 +151,7 @@ class OpenWeatherMap {
         $url = "http://api.openweathermap.org/data/2.5/air_pollution?lat=$lat&lon=$lon&appid=$api_key";
         $info = file_get_contents($url);
         $data = json_decode($info);
-        print_r($data);
+        //print_r($data);
         return $this->OpenWeatherMapApiToNullPollution($data);
         //Pollution::SavePollution($pollution);
         //return $pollution;
@@ -364,6 +378,33 @@ class OpenWeatherMap {
             "sunset" => date("Y-m-d H:i:s",$data->current->sunset),
             "datetime" => date("Y-m-d H:i:s",$data->current->dt),
             "description" => $data->current->weather[0]->description
+        ];
+        return $weather;
+    }
+    /**
+     * converts the json object of OpenWeatherMap Weather data into NullWeather data array
+     * @param object $data the object from the weather api $data->current->weather[0]->main
+     * @return array an associated/keyed array of weather data $weather['main']
+     */
+    private function OpenWeatherMapWeatherApiToNullWeather($data){
+        if(isset($data->current->main)) return $this->OpenWeatherMainMapApiToNullWeather($data);
+        $weather = [
+            "main" => $data->weather[0]->main,
+            "icon" => $data->weather[0]->icon,
+            "clouds" => $data->clouds->all,
+            "temp" => $data->temp,
+            "feels_like" => $data->main->feels_like,
+            "humidity" => $data->main->humidity,
+            "pressure" => $data->main->pressure,
+            "wind_deg" => $data->wind->deg,
+            "wind_speed" => $data->wind->speed,
+            "visibility" => $data->current->visibility,
+            "sunrise_time" => $data->sys->sunrise,
+            "sunset_time" => $data->sys->sunset,
+            "sunrise" => date("Y-m-d H:i:s",$data->sys->sunrise),
+            "sunset" => date("Y-m-d H:i:s",$data->sys->sunset),
+            "datetime" => date("Y-m-d H:i:s",$data->dt),
+            "description" => $data->weather[0]->description
         ];
         return $weather;
     }
